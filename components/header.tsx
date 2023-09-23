@@ -12,7 +12,7 @@ const Header = () => {
         <Logo />
 
         {/* CART BUTTON */}
-        <button className="flex items-center justify-center gap-4 rounded-full bg-orange-200 px-6 py-2">
+        <button className="flex items-center justify-center gap-3 rounded-full bg-orange-200 px-4 py-2 xl:gap-4">
           <div className="relative h-6 w-6">
             <Image src={shoppingBag} alt="shopping bag" fill />
           </div>
