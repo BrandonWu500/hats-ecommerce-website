@@ -4,7 +4,7 @@ import Products from '@/components/products';
 
 const HomePage = () => {
   return (
-    <Container>
+    <Container className="flex-col gap-20">
       <Billboard />
       <Products />
     </Container>
