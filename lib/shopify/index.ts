@@ -1,4 +1,16 @@
-import { SHOPIFY_GRAPHQL_API_ENDPOINT } from '@/lib/constants';
+import {
+  HIDDEN_PRODUCT_TAG,
+  SHOPIFY_GRAPHQL_API_ENDPOINT,
+  TAGS,
+} from '@/lib/constants';
+import { getProductsQuery } from '@/lib/shopify/queries/product';
+import {
+  Connection,
+  Image,
+  Product,
+  ShopifyProduct,
+  ShopifyProductsOperation,
+} from '@/lib/shopify/types';
 import { isShopifyError } from '@/lib/type-guards';
 import { ensureStartsWith } from '@/lib/utils';
 
@@ -66,4 +78,78 @@ export async function shopifyFetch<T>({
       query,
     };
   }
+}
+
+const removeEdgesAndNodes = (array: Connection<any>) => {
+  return array.edges.map((edge) => edge?.node);
+};
+
+const reshapeImages = (images: Connection<Image>, productTitle: string) => {
+  const flattened = removeEdgesAndNodes(images);
+
+  return flattened.map((image) => {
+    const filename = image.url.match(/.*\/(.*)\..*/)[1];
+    return {
+      ...image,
+      altText: image.altText || `${productTitle} - ${filename}`,
+    };
+  });
+};
+
+const reshapeProduct = (
+  product: ShopifyProduct,
+  filterHiddenProducts: boolean = true
+) => {
+  if (
+    !product ||
+    (filterHiddenProducts && product.tags.includes(HIDDEN_PRODUCT_TAG))
+  ) {
+    return undefined;
+  }
+
+  const { images, variants, ...rest } = product;
+
+  return {
+    ...rest,
+    images: reshapeImages(images, product.title),
+    variants: removeEdgesAndNodes(variants),
+  };
+};
+
+const reshapeProducts = (products: ShopifyProduct[]) => {
+  const reshapedProducts = [];
+
+  for (const product of products) {
+    if (product) {
+      const reshapedProduct = reshapeProduct(product);
+
+      if (reshapedProduct) {
+        reshapedProducts.push(reshapedProduct);
+      }
+    }
+  }
+
+  return reshapedProducts;
+};
+
+export async function getProducts({
+  query,
+  reverse,
+  sortKey,
+}: {
+  query?: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getProductsQuery,
+    tags: [TAGS.products],
+    variables: {
+      query,
+      reverse,
+      sortKey,
+    },
+  });
+
+  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
