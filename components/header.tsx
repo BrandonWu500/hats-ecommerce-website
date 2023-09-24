@@ -7,7 +7,7 @@ import shoppingBag from '/public/shopping-bag.svg';
 
 const Header = () => {
   return (
-    <div className="flex h-[80px] justify-center bg-slate-600 xl:h-[100px] xl:pr-0">
+    <div className="sticky top-0 z-50 mb-8 flex h-[80px] justify-center bg-slate-600 xl:h-[100px] xl:pr-0">
       <Container>
         <Logo />
 
