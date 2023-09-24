@@ -24,7 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${raleway.variable} ${roboto.variable}`}>
+      <body
+        className={`${raleway.variable} ${roboto.variable} bg-slate-100 text-slate-700`}
+      >
         <Header />
         {children}
       </body>
