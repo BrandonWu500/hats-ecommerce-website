@@ -1,10 +1,11 @@
 import Billboard from '@/components/billboard';
+import Container from '@/components/container';
 
 const HomePage = () => {
   return (
-    <div>
+    <Container>
       <Billboard />
-    </div>
+    </Container>
   );
 };
 export default HomePage;
