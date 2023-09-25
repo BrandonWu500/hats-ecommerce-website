@@ -1,9 +1,6 @@
 {
-  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
+  "extends": ["next", "prettier"],
   "plugins": ["unicorn"],
-  "globals": {
-    "React": "readonly"
-  },
   "rules": {
     "no-unused-vars": [
       "error",
