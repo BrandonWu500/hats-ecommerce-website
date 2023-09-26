@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type Props = {
   images: {
@@ -19,7 +20,7 @@ const ProductGallery = ({ images }: Props) => {
           src={activeImage.src}
           alt={activeImage.altText}
           fill
-          className="object-cover"
+          className="rounded-[10px] object-cover"
         />
       </div>
       {images.length > 1 && (
@@ -27,14 +28,17 @@ const ProductGallery = ({ images }: Props) => {
           {images.map((image) => (
             <div
               key={image.src}
-              className="relative h-[119px] w-[124px] flex-shrink-0"
+              className={twMerge(
+                'relative aspect-square w-[124px] flex-shrink-0 cursor-pointer rounded-[10px] border-[5px] border-transparent',
+                activeImage.src === image.src && 'border-orange-200'
+              )}
               onClick={() => setActiveImage(image)}
             >
               <Image
                 src={image.src}
                 alt={image.altText}
                 fill
-                className="object-cover"
+                className="rounded-[5px] object-cover"
               />
             </div>
           ))}
