@@ -29,7 +29,7 @@ const ProductGallery = ({ images }: Props) => {
             <div
               key={image.src}
               className={twMerge(
-                'relative aspect-square w-[124px] flex-shrink-0 cursor-pointer rounded-[10px] border-[5px] border-transparent',
+                'relative aspect-square w-[124px] flex-shrink-0 scale-95 cursor-pointer rounded-[10px] border-[5px] border-transparent hover:scale-100',
                 activeImage.src === image.src && 'border-orange-200'
               )}
               onClick={() => setActiveImage(image)}
