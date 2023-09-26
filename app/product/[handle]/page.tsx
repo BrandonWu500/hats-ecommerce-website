@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import Container from '@/components/container';
 import ProductGallery from '@/components/products/product-gallery';
+import ProductInfo from '@/components/products/product-info';
 import { getProduct } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
 
@@ -14,13 +15,14 @@ const ProductPage = async ({ params }: Props) => {
   if (!product) return notFound();
 
   return (
-    <Container>
+    <Container className="flex-col">
       <ProductGallery
         images={product.images.map((image: Image) => ({
           src: image.url,
           altText: image.altText,
         }))}
       />
+      <ProductInfo product={product} />
     </Container>
   );
 };
