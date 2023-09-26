@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 type Props = {
   images: {
@@ -7,13 +10,14 @@ type Props = {
   }[];
 };
 const ProductGallery = ({ images }: Props) => {
-  console.log(images);
+  const [activeImage, setActiveImage] = useState(images[0]);
+
   return (
     <div className="flex w-full flex-col gap-8 pb-8">
       <div className="relative mx-auto h-[291px] w-[338px]">
         <Image
-          src={images[0].src}
-          alt={images[0].altText}
+          src={activeImage.src}
+          alt={activeImage.altText}
           fill
           className="object-cover"
         />
@@ -24,6 +28,7 @@ const ProductGallery = ({ images }: Props) => {
             <div
               key={image.src}
               className="relative h-[119px] w-[124px] flex-shrink-0"
+              onClick={() => setActiveImage(image)}
             >
               <Image
                 src={image.src}
