@@ -7,12 +7,16 @@ import {
   SHOPIFY_GRAPHQL_API_ENDPOINT,
   TAGS,
 } from '@/lib/constants';
-import { getProductsQuery } from '@/lib/shopify/queries/product';
+import {
+  getProductQuery,
+  getProductsQuery,
+} from '@/lib/shopify/queries/product';
 import {
   Connection,
   Image,
   Product,
   ShopifyProduct,
+  ShopifyProductOperation,
   ShopifyProductsOperation,
 } from '@/lib/shopify/types';
 import { isShopifyError } from '@/lib/type-guards';
@@ -156,6 +160,18 @@ export async function getProducts({
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
+export async function getProduct(handle: string): Promise<Product | undefined> {
+  const res = await shopifyFetch<ShopifyProductOperation>({
+    query: getProductQuery,
+    tags: [TAGS.products],
+    variables: {
+      handle,
+    },
+  });
+
+  return reshapeProduct(res.body.data.product, false);
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
