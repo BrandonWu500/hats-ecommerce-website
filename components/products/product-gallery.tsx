@@ -15,21 +15,22 @@ const ProductGallery = ({ images }: Props) => {
 
   return (
     <div className="flex w-full flex-col gap-8 pb-8">
-      <div className="relative mx-auto h-[291px] w-[338px]">
+      <div className="relative mx-auto h-[291px] w-[338px] xl:m-0 xl:h-[605px] xl:w-[571px]">
         <Image
           src={activeImage.src}
           alt={activeImage.altText}
           fill
           className="rounded-[10px] object-cover"
+          sizes="(min-width: 1280px) 571px, 338px"
         />
       </div>
       {images.length > 1 && (
-        <div className="flex w-full gap-8 overflow-x-auto sm:justify-center">
+        <div className="flex w-full gap-8 overflow-x-auto sm:justify-center xl:justify-start">
           {images.map((image) => (
             <div
               key={image.src}
               className={twMerge(
-                'relative aspect-square w-[124px] flex-shrink-0 scale-95 cursor-pointer rounded-[10px] border-[5px] border-transparent hover:scale-100',
+                'relative aspect-square w-[124px] flex-shrink-0 cursor-pointer rounded-[10px] border-[5px] border-transparent hover:opacity-90 xl:w-[160px]',
                 activeImage.src === image.src && 'border-orange-200'
               )}
               onClick={() => setActiveImage(image)}
@@ -39,6 +40,7 @@ const ProductGallery = ({ images }: Props) => {
                 alt={image.altText}
                 fill
                 className="rounded-[5px] object-cover"
+                sizes="(min-width: 1280px) 160px, 124px"
               />
             </div>
           ))}

@@ -19,6 +19,7 @@ const ProductCard = ({ imgUrl, title, price, handle }: Props) => {
             alt={title}
             fill
             className="rounded-[10px] object-cover"
+            sizes="(min-width: 1280px) 313px, 343px"
           />
         </div>
         <div className="flex flex-col gap-2 text-center font-heading xl:text-left">
