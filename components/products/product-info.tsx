@@ -1,5 +1,6 @@
 import Price from '@/components/price';
 import Prose from '@/components/prose';
+import Quantity from '@/components/quantity';
 import { Product } from '@/lib/shopify/types';
 
 type Props = {
@@ -24,6 +25,7 @@ const ProductInfo = ({ product }: Props) => {
         currencyCode={product.priceRange.maxVariantPrice.currencyCode}
         className="text-center font-body text-[32px] font-medium"
       />
+      <Quantity quantity={1} />
     </div>
   );
 };
