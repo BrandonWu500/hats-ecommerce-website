@@ -9,7 +9,7 @@ type Props = {
 const Quantity = ({ quantity }: Props) => {
   return (
     <Menu>
-      <Menu.Button className="relative h-[59px] w-[128px] self-center rounded-full bg-orange-100 font-body text-lg font-medium">
+      <Menu.Button className="relative h-[59px] w-[128px] rounded-full bg-orange-100 font-body text-lg">
         <p className="absolute left-5 top-4 inline-flex gap-2">
           Qty: <span>{quantity}</span>
         </p>

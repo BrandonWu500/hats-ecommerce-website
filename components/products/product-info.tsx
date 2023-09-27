@@ -9,7 +9,7 @@ type Props = {
 };
 const ProductInfo = ({ product }: Props) => {
   return (
-    <div className="my-4 mb-16 flex flex-col gap-6 xl:mt-0">
+    <div className="my-4 mb-16 flex flex-col gap-6 xl:mt-0 xl:gap-5">
       <h1 className="text-center font-heading text-5xl font-semibold xl:text-start xl:text-[72px]">
         {product.title}
       </h1>
@@ -21,13 +21,17 @@ const ProductInfo = ({ product }: Props) => {
       ) : null}
 
       {/* ADD TO CART SECTION */}
-      <Price
-        amount={product.priceRange.maxVariantPrice.amount}
-        currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-        className="text-center font-body text-[32px] font-medium"
-      />
-      <Quantity quantity={1} />
-      <AddToCart />
+      <div className="flex flex-col items-center gap-8 xl:items-start">
+        <Price
+          amount={product.priceRange.maxVariantPrice.amount}
+          currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+          className="text-center font-body text-[32px] font-medium"
+        />
+        <div className="flex flex-col items-center gap-8 xl:-translate-x-1 xl:flex-row xl:items-start">
+          <Quantity quantity={1} />
+          <AddToCart />
+        </div>
+      </div>
     </div>
   );
 };
