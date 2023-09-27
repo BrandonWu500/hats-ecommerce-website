@@ -15,7 +15,7 @@ const ProductPage = async ({ params }: Props) => {
   if (!product) return notFound();
 
   return (
-    <Container className="flex-col">
+    <Container className="flex-col xl:flex-row xl:items-start xl:gap-8">
       <ProductGallery
         images={product.images.map((image: Image) => ({
           src: image.url,
