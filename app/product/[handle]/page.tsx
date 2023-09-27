@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 
 import Container from '@/components/container';
-import ProductGallery from '@/components/products/product-gallery';
-import ProductInfo from '@/components/products/product-info';
+import ProductGallery from '@/components/product/gallery';
+import ProductInfo from '@/components/product/info';
 import { getProduct } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
 
