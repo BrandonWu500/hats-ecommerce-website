@@ -21,13 +21,15 @@ const ProductInfo = ({ product }: Props) => {
       ) : null}
 
       {/* ADD TO CART SECTION */}
-      <Price
-        amount={product.priceRange.maxVariantPrice.amount}
-        currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-        className="text-center font-body text-[32px] font-medium"
-      />
-      <Quantity quantity={1} />
-      <AddToCart />
+      <div className="flex flex-col items-center gap-8 xl:items-start">
+        <Price
+          amount={product.priceRange.maxVariantPrice.amount}
+          currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+          className="text-center font-body text-[32px] font-medium"
+        />
+        <Quantity quantity={1} />
+        <AddToCart />
+      </div>
     </div>
   );
 };
