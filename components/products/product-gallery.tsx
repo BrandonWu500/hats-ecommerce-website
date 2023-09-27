@@ -25,7 +25,7 @@ const ProductGallery = ({ images }: Props) => {
         />
       </div>
       {images.length > 1 && (
-        <div className="flex w-full gap-8 overflow-x-auto sm:justify-center xl:justify-start">
+        <div className="mx-auto flex w-full max-w-[372px] gap-8 overflow-x-auto">
           {images.map((image) => (
             <div
               key={image.src}
