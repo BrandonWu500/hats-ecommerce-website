@@ -1,3 +1,4 @@
+import Price from '@/components/price';
 import Prose from '@/components/prose';
 import { Product } from '@/lib/shopify/types';
 
@@ -16,6 +17,13 @@ const ProductInfo = ({ product }: Props) => {
           html={product.descriptionHtml}
         />
       ) : null}
+
+      {/* ADD TO CART SECTION */}
+      <Price
+        amount={product.priceRange.maxVariantPrice.amount}
+        currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+        className="text-center font-body text-[32px] font-medium"
+      />
     </div>
   );
 };
