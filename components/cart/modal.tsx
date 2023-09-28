@@ -74,7 +74,10 @@ const CartModal = ({ cart }: Props) => {
                         currencyCode={item.cost.totalAmount.currencyCode}
                       />
                     </div>
-                    <Quantity quantity={item.quantity} />
+                    <div className="-translate-x-1">
+                      <Quantity quantity={item.quantity} />
+                    </div>
+                    <p className="font-heading text-xl underline">Remove</p>
                   </div>
                 </li>
               ))}
