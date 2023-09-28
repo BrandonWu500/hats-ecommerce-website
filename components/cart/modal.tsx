@@ -84,7 +84,7 @@ const CartModal = ({ cart }: Props) => {
               ))}
             </ul>
           )}
-          {cart && (
+          {cart && cart.totalQuantity > 0 && (
             <>
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
