@@ -84,21 +84,28 @@ const CartModal = ({ cart }: Props) => {
             </ul>
           )}
           {cart && (
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <p className="font-heading text-2xl font-semibold">Subtotal</p>
-                <span className="font-body text-lg">
-                  {cart.totalQuantity === 1
-                    ? `(${cart.totalQuantity} item)`
-                    : `(${cart.totalQuantity} items)`}
-                </span>
+            <>
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <p className="font-heading text-2xl font-semibold">
+                    Subtotal
+                  </p>
+                  <span className="font-body text-lg">
+                    {cart.totalQuantity === 1
+                      ? `(${cart.totalQuantity} item)`
+                      : `(${cart.totalQuantity} items)`}
+                  </span>
+                </div>
+                <Price
+                  className="text-right text-2xl font-bold"
+                  amount={cart.cost.totalAmount.amount}
+                  currencyCode={cart.cost.totalAmount.currencyCode}
+                />
               </div>
-              <Price
-                className="text-right text-2xl font-bold"
-                amount={cart.cost.totalAmount.amount}
-                currencyCode={cart.cost.totalAmount.currencyCode}
-              />
-            </div>
+              <button className="mt-2 rounded-full bg-orange-200 px-8 py-4 text-center font-heading text-2xl font-medium xl:mt-0 xl:h-[59px] xl:scale-[96%]">
+                Proceed To Checkout
+              </button>
+            </>
           )}
         </Dialog.Panel>
       </Dialog>
