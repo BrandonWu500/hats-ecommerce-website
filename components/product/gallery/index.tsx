@@ -13,7 +13,7 @@ type Props = {
 };
 const ProductGallery = ({ images }: Props) => {
   return (
-    <Tab.Group as="div" className="flex w-full flex-col gap-8 pb-8">
+    <Tab.Group as="div" className="flex w-full flex-col gap-8">
       <Tab.Panels>
         {images.map((image) => (
           <Tab.Panel key={image.src}>
