@@ -9,7 +9,7 @@ const ProductSlider = ({ products, title }: Props) => {
   return (
     <div className="flex w-full flex-col items-center">
       <h2 className="mb-6 font-heading text-[32px] font-semibold">{title}</h2>
-      <ul className="mx-auto mb-16 flex w-full max-w-[400px] gap-8 overflow-x-auto overflow-y-hidden">
+      <ul className="mx-auto flex w-full max-w-[400px] gap-8 overflow-x-auto">
         {products.map((product) => (
           <ProductCard
             key={product.handle}
