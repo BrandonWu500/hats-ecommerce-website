@@ -30,7 +30,7 @@ const CartModal = ({ cart }: Props) => {
       <Dialog open={isOpen} onClose={closeCart} className="relative z-50">
         <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-slate-200 bg-slate-100 p-6 md:w-[390px]">
           <div className="flex items-center justify-between">
-            <p className="text-lg font-semibold">My Cart</p>
+            <p className="font-heading text-[28px] font-medium">Shopping Bag</p>
 
             <button aria-label="Close cart" onClick={closeCart}>
               <XMarkIcon className="h-9" />
@@ -39,7 +39,7 @@ const CartModal = ({ cart }: Props) => {
 
           <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
             <ShoppingBagIcon className="h-16" />
-            <p className="mt-6 text-center text-2xl font-bold">
+            <p className="mt-6 text-center font-heading text-3xl font-semibold">
               Your bag is empty.
             </p>
           </div>
