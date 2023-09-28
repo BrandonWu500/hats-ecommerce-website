@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Price from '@/components/price';
+import Quantity from '@/components/quantity';
 import { Cart } from '@/lib/shopify/types';
 
 type Props = {
@@ -62,15 +63,18 @@ const CartModal = ({ cart }: Props) => {
                       src={item.merchandise.product.featuredImage.url}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <p className="font-heading text-2xl font-semibold">
-                      {item.merchandise.product.title}
-                    </p>
-                    <Price
-                      className="font-body text-xl"
-                      amount={item.cost.totalAmount.amount}
-                      currencyCode={item.cost.totalAmount.currencyCode}
-                    />
+                  <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-2">
+                      <p className="font-heading text-2xl font-semibold">
+                        {item.merchandise.product.title}
+                      </p>
+                      <Price
+                        className="font-body text-xl"
+                        amount={item.cost.totalAmount.amount}
+                        currencyCode={item.cost.totalAmount.currencyCode}
+                      />
+                    </div>
+                    <Quantity quantity={item.quantity} />
                   </div>
                 </li>
               ))}
