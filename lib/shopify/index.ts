@@ -7,14 +7,18 @@ import {
   SHOPIFY_GRAPHQL_API_ENDPOINT,
   TAGS,
 } from '@/lib/constants';
+import { getCartQuery } from '@/lib/shopify/queries/cart';
 import {
   getProductQuery,
   getProductsQuery,
 } from '@/lib/shopify/queries/product';
 import {
+  Cart,
   Connection,
   Image,
   Product,
+  ShopifyCart,
+  ShopifyCartOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductsOperation,
@@ -172,6 +176,35 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
   });
 
   return reshapeProduct(res.body.data.product, false);
+}
+
+const reshapeCart = (cart: ShopifyCart): Cart => {
+  if (!cart.cost?.totalTaxAmount) {
+    cart.cost.totalTaxAmount = {
+      amount: '0.0',
+      currencyCode: 'USD',
+    };
+  }
+
+  return {
+    ...cart,
+    lines: removeEdgesAndNodes(cart.lines),
+  };
+};
+
+export async function getCart(cartId: string): Promise<Cart | undefined> {
+  const res = await shopifyFetch<ShopifyCartOperation>({
+    query: getCartQuery,
+    variables: { cartId },
+    cache: 'no-store',
+  });
+
+  // Old carts becomes `null` when you checkout.
+  if (!res.body.data.cart) {
+    return undefined;
+  }
+
+  return reshapeCart(res.body.data.cart);
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
