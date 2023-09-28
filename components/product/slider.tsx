@@ -7,10 +7,8 @@ type Props = {
 };
 const ProductSlider = ({ products, title }: Props) => {
   return (
-    <>
-      <h2 className="mb-8 mt-4 font-heading text-[32px] font-semibold">
-        {title}
-      </h2>
+    <div className="flex w-full flex-col items-center">
+      <h2 className="mb-6 font-heading text-[32px] font-semibold">{title}</h2>
       <ul className="mx-auto mb-16 flex w-full max-w-[400px] gap-8 overflow-x-auto overflow-y-hidden">
         {products.map((product) => (
           <ProductCard
@@ -24,7 +22,7 @@ const ProductSlider = ({ products, title }: Props) => {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 export default ProductSlider;
