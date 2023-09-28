@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import Container from '@/components/container';
 import ProductGallery from '@/components/product/gallery';
 import ProductInfo from '@/components/product/info';
-import { getProduct } from '@/lib/shopify';
+import ProductSlider from '@/components/product/slider';
+import { getProduct, getProducts } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
 
 type Props = {
@@ -11,18 +12,23 @@ type Props = {
 };
 const ProductPage = async ({ params }: Props) => {
   const product = await getProduct(params.handle);
+  // TODO: Change this to products in same collection
+  const products = await getProducts({});
 
   if (!product) return notFound();
 
   return (
-    <Container className="flex-col xl:flex-row xl:items-start xl:gap-8">
-      <ProductGallery
-        images={product.images.map((image: Image) => ({
-          src: image.url,
-          altText: image.altText,
-        }))}
-      />
-      <ProductInfo product={product} />
+    <Container className="flex-col">
+      <div className="flex w-full flex-col gap-8 xl:flex-row">
+        <ProductGallery
+          images={product.images.map((image: Image) => ({
+            src: image.url,
+            altText: image.altText,
+          }))}
+        />
+        <ProductInfo product={product} />
+      </div>
+      <ProductSlider products={products} title="Related Products" />
     </Container>
   );
 };
