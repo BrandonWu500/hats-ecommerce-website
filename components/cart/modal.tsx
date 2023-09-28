@@ -87,7 +87,7 @@ const CartModal = ({ cart }: Props) => {
             </ul>
           )}
           {cart && cart.totalQuantity > 0 && (
-            <>
+            <div className="flex flex-col gap-4">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <p className="font-heading text-2xl font-semibold">
@@ -113,7 +113,7 @@ const CartModal = ({ cart }: Props) => {
                   Continue Shopping
                 </button>
               </div>
-            </>
+            </div>
           )}
         </Dialog.Panel>
       </Dialog>
