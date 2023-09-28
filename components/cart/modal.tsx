@@ -77,10 +77,10 @@ const CartModal = ({ cart }: Props) => {
                         currencyCode={item.cost.totalAmount.currencyCode}
                       />
                     </div>
+                    <RemoveItemButton item={item} />
                     <div className="-translate-x-1">
                       <Quantity quantity={item.quantity} />
                     </div>
-                    <RemoveItemButton item={item} />
                   </div>
                 </li>
               ))}
