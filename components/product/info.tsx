@@ -9,7 +9,7 @@ type Props = {
 };
 const ProductInfo = ({ product }: Props) => {
   return (
-    <div className="my-4 mb-16 flex flex-col gap-6 xl:mt-0 xl:gap-5">
+    <div className="mb-16 flex flex-col gap-6 xl:gap-5">
       <h1 className="text-center font-heading text-5xl font-semibold xl:text-start xl:text-[72px]">
         {product.title}
       </h1>

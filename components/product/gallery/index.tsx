@@ -13,7 +13,7 @@ type Props = {
 };
 const ProductGallery = ({ images }: Props) => {
   return (
-    <Tab.Group as="div" className="flex w-full flex-col gap-8 pb-8">
+    <Tab.Group as="div" className="flex w-full flex-col gap-4">
       <Tab.Panels>
         {images.map((image) => (
           <Tab.Panel key={image.src}>
@@ -30,7 +30,7 @@ const ProductGallery = ({ images }: Props) => {
         ))}
       </Tab.Panels>
       {images.length > 1 && (
-        <Tab.List className="mx-auto flex w-full max-w-[372px] gap-8 overflow-x-auto xl:ml-0 xl:max-w-[571px]">
+        <Tab.List className="mx-auto flex w-full max-w-[372px] gap-4 overflow-x-auto xl:ml-0 xl:max-w-[571px]">
           {images.map((image) => (
             <ProductGalleryTab key={image.src} image={image} />
           ))}
