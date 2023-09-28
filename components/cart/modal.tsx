@@ -102,9 +102,14 @@ const CartModal = ({ cart }: Props) => {
                   currencyCode={cart.cost.totalAmount.currencyCode}
                 />
               </div>
-              <button className="mt-2 rounded-full bg-orange-200 px-8 py-4 text-center font-heading text-2xl font-medium xl:mt-0 xl:h-[59px] xl:scale-[96%]">
-                Proceed To Checkout
-              </button>
+              <div className="flex flex-col gap-8">
+                <button className="rounded-full bg-orange-200 px-8 py-4 text-center font-heading text-2xl font-medium">
+                  Proceed To Checkout
+                </button>
+                <button className="rounded-full border-2 border-slate-700 bg-transparent px-8 py-4 text-center font-heading text-2xl font-medium">
+                  Continue Shopping
+                </button>
+              </div>
             </>
           )}
         </Dialog.Panel>
