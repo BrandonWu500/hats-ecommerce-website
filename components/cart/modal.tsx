@@ -48,7 +48,7 @@ const CartModal = ({ cart }: Props) => {
               </p>
             </div>
           ) : (
-            <ul>
+            <ul className="flex flex-col gap-6 overflow-y-auto">
               {cart.lines.map((item) => (
                 <li key={item.id} className="flex gap-4">
                   <div className="relative h-[255px] w-[162px]">
