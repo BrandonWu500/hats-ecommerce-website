@@ -41,7 +41,7 @@ const ProductCard = ({
           <h3 className={twMerge('text-[32px] font-semibold', titleClassName)}>
             {title}
           </h3>
-          <Price amount={price} className="text-2xl font-medium" />
+          <Price amount={price} className="font-body text-2xl" />
         </div>
       </Link>
     </li>
