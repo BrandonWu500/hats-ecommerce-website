@@ -5,6 +5,7 @@ import { ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { useState } from 'react';
 
+import RemoveItemButton from '@/components/cart/remove-item-button';
 import Price from '@/components/price';
 import Quantity from '@/components/quantity';
 import { Cart } from '@/lib/shopify/types';
@@ -77,7 +78,7 @@ const CartModal = ({ cart }: Props) => {
                     <div className="-translate-x-1">
                       <Quantity quantity={item.quantity} />
                     </div>
-                    <p className="font-heading text-xl underline">Remove</p>
+                    <RemoveItemButton item={item} />
                   </div>
                 </li>
               ))}
