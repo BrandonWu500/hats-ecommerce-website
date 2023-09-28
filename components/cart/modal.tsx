@@ -28,7 +28,9 @@ const CartModal = ({ cart }: Props) => {
         <div className="relative h-6 w-6">
           <ShoppingBagIcon />
         </div>
-        <p className="font-body text-2xl font-medium">{cart?.totalQuantity}</p>
+        <p className="font-body text-2xl font-medium">
+          {cart?.totalQuantity || 0}
+        </p>
       </button>
 
       <Dialog open={isOpen} onClose={closeCart} className="relative z-50">
