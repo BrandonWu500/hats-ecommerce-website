@@ -29,7 +29,10 @@ const ProductInfo = ({ product }: Props) => {
         />
         <div className="flex flex-col items-center gap-8 xl:-translate-x-1 xl:flex-row xl:items-start">
           <Quantity quantity={1} />
-          <AddToCart />
+          <AddToCart
+            variants={product.variants}
+            availableForSale={product.availableForSale}
+          />
         </div>
       </div>
     </div>
