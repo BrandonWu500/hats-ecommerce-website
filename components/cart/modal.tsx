@@ -5,6 +5,7 @@ import { ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { useState } from 'react';
 
+import RemoveItemButton from '@/components/cart/remove-item-button';
 import Price from '@/components/price';
 import Quantity from '@/components/quantity';
 import { Cart } from '@/lib/shopify/types';
@@ -27,7 +28,9 @@ const CartModal = ({ cart }: Props) => {
         <div className="relative h-6 w-6">
           <ShoppingBagIcon />
         </div>
-        <p className="font-body text-2xl font-medium">{cart?.totalQuantity}</p>
+        <p className="font-body text-2xl font-medium">
+          {cart?.totalQuantity || 0}
+        </p>
       </button>
 
       <Dialog open={isOpen} onClose={closeCart} className="relative z-50">
@@ -77,13 +80,13 @@ const CartModal = ({ cart }: Props) => {
                     <div className="-translate-x-1">
                       <Quantity quantity={item.quantity} />
                     </div>
-                    <p className="font-heading text-xl underline">Remove</p>
+                    <RemoveItemButton item={item} />
                   </div>
                 </li>
               ))}
             </ul>
           )}
-          {cart && (
+          {cart && cart.totalQuantity > 0 && (
             <>
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
