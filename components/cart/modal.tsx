@@ -79,7 +79,7 @@ const CartModal = ({ cart }: Props) => {
                     </div>
                     <RemoveItemButton item={item} />
                     <div className="-translate-x-1">
-                      <Quantity quantity={item.quantity} />
+                      <Quantity item={item} />
                     </div>
                   </div>
                 </li>
