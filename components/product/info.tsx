@@ -36,7 +36,11 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
         />
         <div className="flex flex-col items-center gap-8 xl:-translate-x-2 xl:flex-row xl:items-start">
           {!itemInCart && (
-            <Quantity quantity={quantity} setQuantity={setQuantity} />
+            <Quantity
+              quantity={quantity}
+              quantityAvailable={product.variants[0].quantityAvailable}
+              setQuantity={setQuantity}
+            />
           )}
           <AddToCart
             variants={product.variants}

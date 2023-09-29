@@ -6,15 +6,21 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
 import { updateItemQuantity } from '@/components/cart/actions';
-import { QUANTITY_OPTIONS } from '@/constants';
 import { CartItem } from '@/lib/shopify/types';
+import { range } from '@/lib/utils';
 
 type Props = {
+  quantityAvailable: number;
   item?: CartItem;
   quantity?: number;
   setQuantity?: React.Dispatch<React.SetStateAction<number>>;
 };
-const Quantity = ({ item, quantity = 1, setQuantity }: Props) => {
+const Quantity = ({
+  quantityAvailable,
+  item,
+  quantity = 1,
+  setQuantity,
+}: Props) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -54,7 +60,7 @@ const Quantity = ({ item, quantity = 1, setQuantity }: Props) => {
         />
       </Menu.Button>
       <Menu.Items className="absolute right-2  mt-2 flex w-fit flex-col gap-2 rounded-[10px] bg-orange-100 p-2">
-        {QUANTITY_OPTIONS.map((option) => (
+        {range(quantityAvailable, 1).map((option) => (
           <Menu.Item key={option}>
             {({ active }) => (
               <span
