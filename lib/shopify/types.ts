@@ -26,6 +26,7 @@ export type CartItem = {
       value: string;
     }[];
     product: Product;
+    quantityAvailable: number;
   };
 };
 

@@ -40,6 +40,7 @@ const cartFragment = /* GraphQL */ `
               product {
                 ...product
               }
+              quantityAvailable
             }
           }
         }
