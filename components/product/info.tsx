@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 import AddToCart from '@/components/cart/add-to-cart';
 import Price from '@/components/price';
 import Prose from '@/components/prose';
@@ -6,10 +10,13 @@ import { Product } from '@/lib/shopify/types';
 
 type Props = {
   product: Product;
+  itemInCart: boolean;
 };
-const ProductInfo = ({ product }: Props) => {
+const ProductInfo = ({ product, itemInCart }: Props) => {
+  const [quantity, setQuantity] = useState(1);
+
   return (
-    <div className="flex flex-col gap-6 xl:gap-5">
+    <div className="z-10 flex flex-col gap-6 xl:gap-5">
       <h1 className="text-center font-heading text-5xl font-semibold xl:text-start xl:text-[72px]">
         {product.title}
       </h1>
@@ -27,11 +34,15 @@ const ProductInfo = ({ product }: Props) => {
           currencyCode={product.priceRange.maxVariantPrice.currencyCode}
           className="text-center font-body text-[32px] font-medium"
         />
-        <div className="flex flex-col items-center gap-8 xl:-translate-x-1 xl:flex-row xl:items-start">
-          <Quantity quantity={1} />
+        <div className="flex flex-col items-center gap-8 xl:-translate-x-2 xl:flex-row xl:items-start">
+          {!itemInCart && (
+            <Quantity quantity={quantity} setQuantity={setQuantity} />
+          )}
           <AddToCart
             variants={product.variants}
             availableForSale={product.availableForSale}
+            quantity={quantity}
+            itemInCart={itemInCart}
           />
         </div>
       </div>
