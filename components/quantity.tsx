@@ -59,7 +59,7 @@ const Quantity = ({
           aria-hidden="true"
         />
       </Menu.Button>
-      <Menu.Items className="absolute right-2  mt-2 flex w-fit flex-col gap-2 rounded-[10px] bg-orange-100 p-2">
+      <Menu.Items className="absolute right-2 mt-2 flex max-h-[150px] w-fit flex-col gap-2 overflow-y-auto rounded-[10px] bg-orange-100 p-2">
         {range(quantityAvailable, 1).map((option) => (
           <Menu.Item key={option}>
             {({ active }) => (
