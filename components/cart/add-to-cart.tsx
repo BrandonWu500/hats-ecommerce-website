@@ -59,7 +59,9 @@ const AddToCart = ({
         </p>
       ) : (
         <>
-          <ShoppingBagIcon className="h-7 w-7 xl:h-6 xl:w-6" />
+          {availableForSale && (
+            <ShoppingBagIcon className="h-7 w-7 xl:h-6 xl:w-6" />
+          )}
           <p className="font-heading text-2xl font-semibold xl:text-lg">
             {availableForSale ? 'Add To Bag' : 'Out Of Stock'}
           </p>
