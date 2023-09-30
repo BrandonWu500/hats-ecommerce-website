@@ -3,7 +3,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import RemoveItemButton from '@/components/cart/remove-item-button';
 import Price from '@/components/price';
@@ -15,8 +15,22 @@ type Props = {
 };
 const CartModal = ({ cart }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
+
+  useEffect(() => {
+    // Open cart modal when quantity changes.
+    if (cart?.totalQuantity !== quantityRef.current) {
+      // But only if it's not already open (quantity also changes when editing items in cart).
+      if (!isOpen) {
+        setIsOpen(true);
+      }
+
+      // Always update the quantity reference
+      quantityRef.current = cart?.totalQuantity;
+    }
+  }, [isOpen, cart?.totalQuantity, quantityRef]);
 
   return (
     <>
