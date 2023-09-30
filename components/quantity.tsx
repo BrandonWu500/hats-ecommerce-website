@@ -45,6 +45,8 @@ const Quantity = ({
     });
   };
 
+  if (quantityAvailable === 0) return null;
+
   return (
     <Menu as="div" className="relative ">
       <Menu.Button
