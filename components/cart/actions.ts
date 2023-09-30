@@ -10,7 +10,8 @@ import {
 import { cookies } from 'next/headers';
 
 export const addItem = async (
-  variantId: string | undefined
+  variantId: string | undefined,
+  quantity: number
 ): Promise<String | undefined> => {
   let cartId = cookies().get('cartId')?.value;
   let cart;
@@ -30,7 +31,12 @@ export const addItem = async (
   }
 
   try {
-    await addToCart(cartId, [{ merchandiseId: variantId, quantity: 1 }]);
+    await addToCart(cartId, [
+      {
+        merchandiseId: variantId,
+        quantity,
+      },
+    ]);
   } catch (e) {
     return 'Error adding item to cart';
   }

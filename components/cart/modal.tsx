@@ -77,17 +77,20 @@ const CartModal = ({ cart }: Props) => {
                         currencyCode={item.cost.totalAmount.currencyCode}
                       />
                     </div>
-                    <div className="-translate-x-1">
-                      <Quantity quantity={item.quantity} />
-                    </div>
                     <RemoveItemButton item={item} />
+                    <div className="-translate-x-1">
+                      <Quantity
+                        item={item}
+                        quantityAvailable={item.merchandise.quantityAvailable}
+                      />
+                    </div>
                   </div>
                 </li>
               ))}
             </ul>
           )}
           {cart && cart.totalQuantity > 0 && (
-            <>
+            <div className="flex flex-col gap-4">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <p className="font-heading text-2xl font-semibold">
@@ -113,7 +116,7 @@ const CartModal = ({ cart }: Props) => {
                   Continue Shopping
                 </button>
               </div>
-            </>
+            </div>
           )}
         </Dialog.Panel>
       </Dialog>
