@@ -149,9 +149,11 @@ const CartModal = ({ cart }: Props) => {
                     />
                   </div>
                   <div className="flex flex-col gap-8">
-                    <button className="rounded-full bg-orange-200 px-8 py-4 text-center font-heading text-2xl font-medium">
-                      Proceed To Checkout
-                    </button>
+                    <a href={cart.checkoutUrl}>
+                      <button className="w-full rounded-full bg-orange-200 px-8 py-4 text-center font-heading text-2xl font-medium">
+                        Proceed To Checkout
+                      </button>
+                    </a>
                     <button
                       onClick={closeCart}
                       className="rounded-full border-2 border-slate-700 bg-transparent px-8 py-4 text-center font-heading text-2xl font-medium"
