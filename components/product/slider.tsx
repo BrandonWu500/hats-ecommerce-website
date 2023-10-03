@@ -11,7 +11,7 @@ const ProductSlider = ({ products, title }: Props) => {
       <h2 className="mb-6 font-heading text-[32px] font-semibold xl:self-start xl:text-4xl">
         {title}
       </h2>
-      <ul className="mx-auto flex w-full max-w-[400px] gap-8 overflow-x-auto xl:max-w-none">
+      <ul className="mx-auto flex w-full max-w-[400px] gap-8 overflow-x-auto pb-4 xl:max-w-none xl:scrollbar xl:scrollbar-track-orange-200 xl:scrollbar-thumb-slate-700">
         {products.map((product) => (
           <ProductCard
             key={product.handle}
