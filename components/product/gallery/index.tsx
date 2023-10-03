@@ -30,7 +30,7 @@ const ProductGallery = ({ images }: Props) => {
         ))}
       </Tab.Panels>
       {images.length > 1 && (
-        <Tab.List className="mx-auto flex w-full max-w-[372px] gap-4 overflow-x-auto xl:ml-0 xl:max-w-[571px]">
+        <Tab.List className="mx-auto flex w-full max-w-[372px] gap-4 overflow-x-auto pb-4 xl:ml-0 xl:max-w-[571px] xl:scrollbar xl:scrollbar-track-orange-200 xl:scrollbar-thumb-slate-700">
           {images.map((image) => (
             <ProductGalleryTab key={image.src} image={image} />
           ))}
