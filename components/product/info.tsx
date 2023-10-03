@@ -44,7 +44,7 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
           )}
           <AddToCart
             variants={product.variants}
-            availableForSale={product.availableForSale}
+            quantityAvailable={product.variants[0].quantityAvailable}
             quantity={quantity}
             itemInCart={itemInCart}
           />

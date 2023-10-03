@@ -8,14 +8,14 @@ import { addItem } from '@/components/cart/actions';
 import { ProductVariant } from '@/lib/shopify/types';
 
 type Props = {
-  availableForSale: boolean;
+  quantityAvailable: number;
   variants: ProductVariant[];
   quantity?: number;
   itemInCart: boolean;
 };
 const AddToCart = ({
   variants,
-  availableForSale,
+  quantityAvailable,
   quantity = 1,
   itemInCart,
 }: Props) => {
@@ -23,22 +23,23 @@ const AddToCart = ({
   const [isPending, startTransition] = useTransition();
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
   const selectedVariantId = defaultVariantId;
-  const title = !availableForSale
-    ? 'Out of stock'
-    : !selectedVariantId
-    ? 'Please select options'
-    : undefined;
+  const title =
+    quantityAvailable === 0
+      ? 'Out of stock'
+      : !selectedVariantId
+      ? 'Please select options'
+      : undefined;
 
   return (
     <button
       aria-label="Add item to bag"
       disabled={
-        isPending || !availableForSale || !selectedVariantId || itemInCart
+        isPending || !quantityAvailable || !selectedVariantId || itemInCart
       }
       title={title}
       onClick={() => {
         // Safeguard in case someone messes with `disabled` in devtools.
-        if (!availableForSale || !selectedVariantId) return;
+        if (!quantityAvailable || !selectedVariantId) return;
 
         startTransition(async () => {
           const error = await addItem(selectedVariantId, quantity);
@@ -59,11 +60,11 @@ const AddToCart = ({
         </p>
       ) : (
         <>
-          {availableForSale && (
+          {quantityAvailable ? (
             <ShoppingBagIcon className="h-7 w-7 xl:h-6 xl:w-6" />
-          )}
+          ) : null}
           <p className="font-heading text-2xl font-semibold xl:text-lg">
-            {availableForSale ? 'Add To Bag' : 'Out Of Stock'}
+            {quantityAvailable ? 'Add To Bag' : 'Out Of Stock'}
           </p>
         </>
       )}
