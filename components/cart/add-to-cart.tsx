@@ -3,6 +3,7 @@
 import { ShoppingBagIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import { addItem } from '@/components/cart/actions';
 import { ProductVariant } from '@/lib/shopify/types';
@@ -59,9 +60,13 @@ const AddToCart = ({
         </p>
       ) : (
         <>
-          {availableForSale && (
-            <ShoppingBagIcon className="h-7 w-7 xl:h-6 xl:w-6" />
-          )}
+          {availableForSale ? (
+            isPending ? (
+              <ClipLoader color="#334155" />
+            ) : (
+              <ShoppingBagIcon className="h-7 w-7 xl:h-6 xl:w-6" />
+            )
+          ) : null}
           <p className="font-heading text-2xl font-semibold xl:text-lg">
             {availableForSale ? 'Add To Bag' : 'Out Of Stock'}
           </p>

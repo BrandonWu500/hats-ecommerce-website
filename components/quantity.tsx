@@ -4,6 +4,7 @@ import { Menu } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import { updateItemQuantity } from '@/components/cart/actions';
 import { CartItem } from '@/lib/shopify/types';
@@ -53,9 +54,13 @@ const Quantity = ({
         disabled={isPending}
         className="relative  h-[59px] w-[128px] rounded-full bg-orange-100 font-body text-lg"
       >
-        <p className="absolute left-5 top-4 inline-flex gap-2">
-          Qty: <span>{item?.quantity || quantity}</span>
-        </p>
+        {isPending ? (
+          <ClipLoader color="#334155" className="absolute left-6 top-3" />
+        ) : (
+          <p className="absolute left-5 top-4 inline-flex gap-2">
+            Qty: <span>{item?.quantity || quantity}</span>
+          </p>
+        )}
         <ChevronDownIcon
           className="absolute right-4 top-5 h-5 w-5"
           aria-hidden="true"
