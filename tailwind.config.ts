@@ -13,6 +13,6 @@ const config: Config = {
     },
     extend: {},
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar')],
 };
 export default config;
