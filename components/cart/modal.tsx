@@ -9,6 +9,7 @@ import RemoveItemButton from '@/components/cart/remove-item-button';
 import Price from '@/components/price';
 import Quantity from '@/components/quantity';
 import { Cart } from '@/lib/shopify/types';
+import Link from 'next/link';
 
 type Props = {
   cart: Cart | undefined;
@@ -92,23 +93,33 @@ const CartModal = ({ cart }: Props) => {
                 <ul className="flex flex-col gap-6 overflow-y-auto">
                   {cart.lines.map((item) => (
                     <li key={item.id} className="flex gap-4">
-                      <div className="relative h-[255px] w-[162px]">
-                        <Image
-                          className="rounded-[10px] object-cover"
-                          fill
-                          sizes="162px"
-                          alt={
-                            item.merchandise.product.featuredImage.altText ||
-                            item.merchandise.product.title
-                          }
-                          src={item.merchandise.product.featuredImage.url}
-                        />
-                      </div>
+                      <Link
+                        href={`/product/${item.merchandise.product.handle}`}
+                        onClick={closeCart}
+                      >
+                        <div className="relative h-[255px] w-[162px]">
+                          <Image
+                            className="rounded-[10px] object-cover"
+                            fill
+                            sizes="162px"
+                            alt={
+                              item.merchandise.product.featuredImage.altText ||
+                              item.merchandise.product.title
+                            }
+                            src={item.merchandise.product.featuredImage.url}
+                          />
+                        </div>
+                      </Link>
                       <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-2">
-                          <p className="font-heading text-2xl font-semibold">
-                            {item.merchandise.product.title}
-                          </p>
+                          <Link
+                            href={`/product/${item.merchandise.product.handle}`}
+                            onClick={closeCart}
+                          >
+                            <p className="font-heading text-2xl font-semibold">
+                              {item.merchandise.product.title}
+                            </p>
+                          </Link>
                           <Price
                             className="font-body text-xl"
                             amount={item.cost.totalAmount.amount}
