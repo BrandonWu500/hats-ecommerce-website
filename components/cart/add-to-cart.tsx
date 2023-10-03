@@ -10,13 +10,13 @@ import { ProductVariant } from '@/lib/shopify/types';
 type Props = {
   quantityAvailable: number;
   variants: ProductVariant[];
-  quantity?: number;
+  quantity: number;
   itemInCart: boolean;
 };
 const AddToCart = ({
   variants,
   quantityAvailable,
-  quantity = 1,
+  quantity,
   itemInCart,
 }: Props) => {
   const router = useRouter();
@@ -30,6 +30,14 @@ const AddToCart = ({
       ? 'Please select options'
       : undefined;
 
+  if (quantityAvailable === 0) {
+    return (
+      <div className="mt-2 flex cursor-not-allowed items-center gap-4 rounded-full bg-orange-100 px-8 py-4 font-heading text-2xl font-semibold xl:mt-0 xl:h-[59px] xl:scale-[96%] xl:text-lg">
+        Out Of Stock
+      </div>
+    );
+  }
+
   return (
     <button
       aria-label="Add item to bag"
@@ -39,7 +47,7 @@ const AddToCart = ({
       title={title}
       onClick={() => {
         // Safeguard in case someone messes with `disabled` in devtools.
-        if (!quantityAvailable || !selectedVariantId) return;
+        if (!quantityAvailable || !selectedVariantId || !quantity) return;
 
         startTransition(async () => {
           const error = await addItem(selectedVariantId, quantity);
