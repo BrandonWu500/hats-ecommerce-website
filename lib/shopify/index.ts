@@ -16,6 +16,7 @@ import {
 import { getCartQuery } from '@/lib/shopify/queries/cart';
 import {
   getProductQuery,
+  getProductRecommendationsQuery,
   getProductsQuery,
 } from '@/lib/shopify/queries/product';
 import {
@@ -29,6 +30,7 @@ import {
   ShopifyCreateCartOperation,
   ShopifyProduct,
   ShopifyProductOperation,
+  ShopifyProductRecommendationsOperation,
   ShopifyProductsOperation,
   ShopifyRemoveFromCartOperation,
   ShopifyUpdateCartOperation,
@@ -186,6 +188,20 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
   });
 
   return reshapeProduct(res.body.data.product, false);
+}
+
+export async function getProductRecommendations(
+  productId: string
+): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductRecommendationsOperation>({
+    query: getProductRecommendationsQuery,
+    tags: [TAGS.products],
+    variables: {
+      productId,
+    },
+  });
+
+  return reshapeProducts(res.body.data.productRecommendations);
 }
 
 const reshapeCart = (cart: ShopifyCart): Cart => {

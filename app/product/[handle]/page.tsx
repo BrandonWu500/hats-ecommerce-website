@@ -5,7 +5,7 @@ import Container from '@/components/container';
 import ProductGallery from '@/components/product/gallery';
 import ProductInfo from '@/components/product/info';
 import ProductSlider from '@/components/product/slider';
-import { getCart, getProduct, getProducts } from '@/lib/shopify';
+import { getCart, getProduct, getProductRecommendations } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
 
 type Props = {
@@ -15,8 +15,7 @@ const ProductPage = async ({ params }: Props) => {
   const product = await getProduct(params.handle);
   if (!product) return notFound();
 
-  // TODO: Change this to products in same collection
-  const products = await getProducts({});
+  const relatedProducts = await getProductRecommendations(product.id);
 
   const cartId = cookies().get('cartId')?.value;
   let cart;
@@ -44,7 +43,7 @@ const ProductPage = async ({ params }: Props) => {
         />
         <ProductInfo product={product} itemInCart={itemInCart} />
       </div>
-      <ProductSlider products={products} title="Related Products" />
+      <ProductSlider products={relatedProducts} title="Related Products" />
     </Container>
   );
 };
