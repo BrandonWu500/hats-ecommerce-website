@@ -11,6 +11,6 @@ const CartPage = () => {
     openCart();
   }, [openCart]);
 
-  return <div className="min-h-[60vh]"></div>;
+  return <div></div>;
 };
 export default CartPage;
