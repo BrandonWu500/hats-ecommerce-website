@@ -8,8 +8,8 @@ const Footer = async () => {
 
   return (
     <div className="bg-slate-600 text-orange-200">
-      <Container className="flex-col xl:mt-16">
-        <ul className="flex flex-col items-center justify-center gap-6 py-6 pb-10 font-body text-lg ">
+      <Container className="flex-col">
+        <ul className="flex flex-col items-center justify-center gap-6 py-6 pb-10 font-body text-lg xl:flex-row xl:gap-8">
           {menu.map((item) => (
             <li key={item.title}>
               <Link href={item.path}>{item.title}</Link>
