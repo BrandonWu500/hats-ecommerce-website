@@ -15,6 +15,7 @@ import {
 } from '@/lib/shopify/mutations/cart';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
 import { getMenuQuery } from '@/lib/shopify/queries/menu';
+import { getPageQuery } from '@/lib/shopify/queries/page';
 import {
   getProductQuery,
   getProductRecommendationsQuery,
@@ -25,12 +26,14 @@ import {
   Connection,
   Image,
   Menu,
+  Page,
   Product,
   ShopifyAddToCartOperation,
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
+  ShopifyPageOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductRecommendationsOperation,
@@ -350,4 +353,13 @@ export async function getMenu(handle: string): Promise<Menu[]> {
         .replace('/pages', ''),
     })) || []
   );
+}
+
+export async function getPage(handle: string): Promise<Page> {
+  const res = await shopifyFetch<ShopifyPageOperation>({
+    query: getPageQuery,
+    variables: { handle },
+  });
+
+  return res.body.data.pageByHandle;
 }
