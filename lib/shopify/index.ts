@@ -14,6 +14,7 @@ import {
   removeFromCartMutation,
 } from '@/lib/shopify/mutations/cart';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
+import { getMenuQuery } from '@/lib/shopify/queries/menu';
 import {
   getProductQuery,
   getProductRecommendationsQuery,
@@ -23,11 +24,13 @@ import {
   Cart,
   Connection,
   Image,
+  Menu,
   Product,
   ShopifyAddToCartOperation,
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCreateCartOperation,
+  ShopifyMenuOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductRecommendationsOperation,
@@ -327,4 +330,24 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   }
 
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
+}
+
+export async function getMenu(handle: string): Promise<Menu[]> {
+  const res = await shopifyFetch<ShopifyMenuOperation>({
+    query: getMenuQuery,
+    tags: [TAGS.collections],
+    variables: {
+      handle,
+    },
+  });
+
+  return (
+    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
+      title: item.title,
+      path: item.url
+        .replace(domain, '')
+        .replace('/collections', '/search')
+        .replace('/pages', ''),
+    })) || []
+  );
 }
