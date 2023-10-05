@@ -3,7 +3,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import Cart from '@/components/cart';
 import Container from '@/components/container';
 import Logo from '@/components/logo';
-import Searchbar from '@/components/searchbar';
+import Searchbar from '@/components/search/bar';
 
 const Header = () => {
   return (

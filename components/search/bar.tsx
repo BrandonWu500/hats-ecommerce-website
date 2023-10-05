@@ -4,7 +4,7 @@ import { createUrl } from '@/lib/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const Searchbar = () => {
+const SearchBar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,4 +40,4 @@ const Searchbar = () => {
     </form>
   );
 };
-export default Searchbar;
+export default SearchBar;
