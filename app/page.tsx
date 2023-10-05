@@ -1,12 +1,15 @@
 import Billboard from '@/components/billboard';
 import Container from '@/components/container';
 import Products from '@/components/products';
+import { getProducts } from '@/lib/shopify';
 
-const HomePage = () => {
+const HomePage = async () => {
+  const products = await getProducts({});
+
   return (
     <Container className="flex-col gap-20 pb-8">
       <Billboard />
-      <Products />
+      <Products products={products} title="Products" />
     </Container>
   );
 };
