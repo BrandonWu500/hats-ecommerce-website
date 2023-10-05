@@ -18,7 +18,7 @@ const SearchModal = () => {
         aria-label="Show search field"
         className="rounded-full bg-orange-200 p-3"
       >
-        <MagnifyingGlassIcon className="h-6 text-slate-600 xl:hidden" />
+        <MagnifyingGlassIcon className="h-6 text-slate-600" />
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={onClose} className="relative z-50">
