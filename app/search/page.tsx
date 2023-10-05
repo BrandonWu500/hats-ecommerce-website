@@ -23,12 +23,12 @@ const SearchPage = async ({ searchParams }: Props) => {
 
   return (
     <Container className="flex-col pb-8">
-      <div className="w-full rounded-[10px] bg-orange-200 p-8 xl:px-24 xl:py-16">
-        <p className="flex flex-col font-body text-[32px] text-slate-600 xl:text-[72px]">
+      <div className="w-full rounded-[10px] bg-orange-200 p-8 xl:px-48 xl:py-8">
+        <p className="flex flex-col text-center font-body text-[32px] text-slate-600 xl:text-[48px]">
           <span className="capitalize">
             Found {products.length} {resultsText} for
           </span>
-          <span className="break-all text-[36px] font-medium">
+          <span className="overflow-x-auto whitespace-nowrap pb-2 text-[36px] font-medium xl:text-[56px] xl:scrollbar xl:scrollbar-track-orange-100 xl:scrollbar-thumb-slate-600">
             {searchValue}
           </span>
         </p>
