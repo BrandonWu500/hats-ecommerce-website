@@ -25,17 +25,20 @@ const SearchBar = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="relative w-full max-w-[550px]">
+    <form
+      onSubmit={onSubmit}
+      className="flex w-full max-w-[550px] items-center justify-between rounded-full bg-orange-200 pr-6"
+    >
       <input
         type="text"
         name="search"
         placeholder="What are you looking for today?"
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full rounded-full bg-orange-200 px-6 py-3 font-body text-lg text-slate-700 placeholder:text-slate-600 focus:outline-none"
+        className="w-full grow rounded-full bg-orange-200 py-3 pl-6 pr-4 font-body text-slate-700 placeholder:text-slate-600 focus:outline-none xl:text-lg"
       />
-      <button className="absolute right-3 top-0 mr-3 flex h-full items-center">
-        <MagnifyingGlassIcon className="h-6" />
+      <button className="flex h-full items-center">
+        <MagnifyingGlassIcon className="h-5 xl:h-6" />
       </button>
     </form>
   );
