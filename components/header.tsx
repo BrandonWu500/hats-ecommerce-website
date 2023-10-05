@@ -1,3 +1,5 @@
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+
 import Cart from '@/components/cart';
 import Container from '@/components/container';
 import Logo from '@/components/logo';
@@ -11,7 +13,12 @@ const Header = () => {
         <div className="hidden xl:flex xl:grow xl:justify-center">
           <Searchbar />
         </div>
-        <Cart />
+        <div className="flex items-center gap-4">
+          <button className="rounded-full bg-orange-200 p-3">
+            <MagnifyingGlassIcon className="h-6 text-slate-600 xl:hidden" />
+          </button>
+          <Cart />
+        </div>
       </Container>
     </div>
   );
