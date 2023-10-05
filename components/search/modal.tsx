@@ -2,14 +2,21 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { Fragment, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { Fragment, useEffect, useState } from 'react';
 
 import SearchBar from '@/components/search/bar';
 
 const SearchModal = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const onOpen = () => setIsOpen(true);
   const onClose = () => setIsOpen(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname, searchParams]);
 
   return (
     <>
