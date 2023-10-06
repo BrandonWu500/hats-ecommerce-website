@@ -15,7 +15,7 @@ import {
 } from '@/lib/shopify/mutations/cart';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
 import { getMenuQuery } from '@/lib/shopify/queries/menu';
-import { getPageQuery } from '@/lib/shopify/queries/page';
+import { getPageQuery, getPagesQuery } from '@/lib/shopify/queries/page';
 import {
   getProductQuery,
   getProductRecommendationsQuery,
@@ -34,6 +34,7 @@ import {
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
   ShopifyPageOperation,
+  ShopifyPagesOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductRecommendationsOperation,
@@ -362,4 +363,12 @@ export async function getPage(handle: string): Promise<Page> {
   });
 
   return res.body.data.pageByHandle;
+}
+
+export async function getPages(): Promise<Page[]> {
+  const res = await shopifyFetch<ShopifyPagesOperation>({
+    query: getPagesQuery,
+  });
+
+  return removeEdgesAndNodes(res.body.data.pages);
 }
