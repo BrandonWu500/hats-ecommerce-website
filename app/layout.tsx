@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Raleway, Roboto } from 'next/font/google';
 
 import Footer from '@/components/footer';
@@ -6,16 +5,21 @@ import Header from '@/components/header';
 
 import './globals.css';
 
+const { SITE_NAME } = process.env;
+
+export const metadata = {
+  title: {
+    default: SITE_NAME!,
+    template: `%s | ${SITE_NAME}`,
+  },
+};
+
 const raleway = Raleway({ subsets: ['latin'], variable: '--heading-font' });
 const roboto = Roboto({
   subsets: ['latin'],
   variable: '--body-font',
   weight: ['400', '500', '700'],
 });
-
-export const metadata: Metadata = {
-  title: 'BW Hats',
-};
 
 export default function RootLayout({
   children,
