@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -7,6 +8,23 @@ import ProductInfo from '@/components/product/info';
 import ProductSlider from '@/components/product/slider';
 import { getCart, getProduct, getProductRecommendations } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
+
+export const runtime = 'edge';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { handle: string };
+}): Promise<Metadata> {
+  const product = await getProduct(params.handle);
+
+  if (!product) return notFound();
+
+  return {
+    title: product.seo.title || product.title,
+    description: product.seo.description || product.description,
+  };
+}
 
 type Props = {
   params: { handle: string };
