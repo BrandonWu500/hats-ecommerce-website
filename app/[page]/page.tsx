@@ -7,7 +7,7 @@ import { getPage } from '@/lib/shopify';
 
 export const runtime = 'edge';
 
-export const revalidate = 43200; // 12 hours in seconds
+export const revalidate = 60; // seconds
 
 export async function generateMetadata({
   params,
