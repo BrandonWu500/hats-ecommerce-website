@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import AddToCart from '@/components/cart/add-to-cart';
 import Price from '@/components/price';
+import VariantSelector from '@/components/product/variant-selector';
 import Prose from '@/components/prose';
 import Quantity from '@/components/quantity';
 import { Product } from '@/lib/shopify/types';
@@ -34,6 +35,12 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
           currencyCode={product.priceRange.maxVariantPrice.currencyCode}
           className="text-center font-body text-[32px] font-medium"
         />
+
+        <VariantSelector
+          options={product.options}
+          variants={product.variants}
+        />
+
         <div className="flex flex-col items-center gap-8 xl:-translate-x-2 xl:flex-row xl:items-start">
           {!itemInCart && (
             <Quantity
