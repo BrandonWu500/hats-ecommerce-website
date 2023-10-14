@@ -51,7 +51,7 @@ const VariantSelector = ({ options, variants }: Props) => {
           {searchParams.get(option.name.toLowerCase()) ?? 'Select Size'}
         </span>
       </dt>
-      <dd className="flex flex-wrap gap-3">
+      <dd className="flex flex-wrap gap-4">
         {option.values.map((value) => {
           const optionNameLowerCase = option.name.toLowerCase();
 
@@ -104,13 +104,13 @@ const VariantSelector = ({ options, variants }: Props) => {
                 !isAvailableForSale ? ' (Out of Stock)' : ''
               }`}
               className={twMerge(
-                'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm',
-                isActive && 'cursor-default ring-2 ring-blue-600',
+                'flex min-w-[48px] items-center justify-center rounded-full bg-orange-100 px-6 py-2 font-body text-lg font-medium',
+                isActive && 'cursor-default ring-4 ring-orange-200',
                 !isActive &&
                   isAvailableForSale &&
-                  'ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600',
+                  'ring-2 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-orange-200',
                 !isAvailableForSale &&
-                  'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700'
+                  'relative z-10 cursor-not-allowed overflow-hidden bg-slate-100 text-slate-500 ring-2 ring-slate-300 before:absolute before:inset-x-0 before:-z-10 before:h-[2px] before:-rotate-45 before:bg-slate-300 before:transition-transform'
               )}
             >
               {value}
