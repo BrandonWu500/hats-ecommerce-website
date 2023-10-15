@@ -1,7 +1,7 @@
 'use client';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/solid';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { ClipLoader } from 'react-spinners';
 
@@ -21,9 +21,15 @@ const AddToCart = ({
   itemInCart,
 }: Props) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
-  const selectedVariantId = defaultVariantId;
+  const variant = variants.find((variant: ProductVariant) =>
+    variant.selectedOptions.every(
+      (option) => option.value === searchParams.get(option.name.toLowerCase())
+    )
+  );
+  const selectedVariantId = variant?.id || defaultVariantId;
   const title = !availableForSale
     ? 'Out of stock'
     : !selectedVariantId
