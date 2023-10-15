@@ -47,3 +47,5 @@ export const sorting: SortFilterItem[] = [
     reverse: true,
   },
 ];
+
+export const DEFAULT_OPTION = 'Default Title';
