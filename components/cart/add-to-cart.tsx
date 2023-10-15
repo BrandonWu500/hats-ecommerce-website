@@ -50,7 +50,7 @@ const AddToCart = ({ variants, availableForSale, quantity = 1 }: Props) => {
           router.refresh();
         });
       }}
-      className="mt-2 flex items-center gap-4 rounded-full bg-orange-200 px-8 py-4 disabled:cursor-not-allowed disabled:bg-orange-100 xl:mt-0 xl:h-[59px] xl:scale-[96%]"
+      className="flex items-center gap-4 rounded-full bg-orange-200 px-8 py-4 disabled:cursor-not-allowed disabled:bg-orange-100 xl:h-[59px]"
     >
       {availableForSale ? (
         isPending ? (

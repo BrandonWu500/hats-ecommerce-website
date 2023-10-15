@@ -40,7 +40,7 @@ const ProductInfo = ({ product }: Props) => {
       ) : null}
 
       {/* ADD TO CART SECTION */}
-      <div className="flex flex-col items-center gap-8 xl:items-start">
+      <div className="flex flex-col items-center gap-6 xl:items-start">
         <Price
           amount={
             product.variants[variantIdx]?.price.amount ||
