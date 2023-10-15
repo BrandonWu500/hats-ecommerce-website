@@ -1,22 +1,18 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
 
 import AddToCart from '@/components/cart/add-to-cart';
 import Price from '@/components/price';
 import VariantSelector from '@/components/product/variant-selector';
 import Prose from '@/components/prose';
-import Quantity from '@/components/quantity';
 import { Product, ProductVariant } from '@/lib/shopify/types';
 
 type Props = {
   product: Product;
-  itemInCart: boolean;
 };
-const ProductInfo = ({ product, itemInCart }: Props) => {
+const ProductInfo = ({ product }: Props) => {
   const searchParams = useSearchParams();
-  const [quantity, setQuantity] = useState(1);
 
   const { variants } = product;
 
@@ -63,17 +59,9 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
         />
 
         <div className="flex flex-col items-center gap-8 xl:-translate-x-2 xl:flex-row xl:items-start">
-          {!itemInCart && (
-            <Quantity
-              quantity={quantity}
-              quantityAvailable={product.variants[0].quantityAvailable}
-              setQuantity={setQuantity}
-            />
-          )}
           <AddToCart
             variants={product.variants}
             availableForSale={product.availableForSale}
-            quantity={quantity}
           />
         </div>
       </div>
