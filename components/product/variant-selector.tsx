@@ -43,7 +43,7 @@ const VariantSelector = ({ options, variants }: Props) => {
 
   return options.map((option) => (
     <dl className="mb-8" key={option.id}>
-      <dt className="mb-4 flex items-center justify-center gap-3 text-center font-body text-lg">
+      <dt className="mb-4 flex items-center justify-center gap-3 text-center font-body text-lg xl:justify-start xl:text-left xl:text-xl">
         {searchParams.get(option.name.toLowerCase()) && (
           <span>{option.name}:</span>
         )}
@@ -51,7 +51,7 @@ const VariantSelector = ({ options, variants }: Props) => {
           {searchParams.get(option.name.toLowerCase()) ?? 'Select Size'}
         </span>
       </dt>
-      <dd className="flex flex-wrap gap-4">
+      <dd className="flex flex-wrap gap-4 xl:-translate-x-1">
         {option.values.map((value) => {
           const optionNameLowerCase = option.name.toLowerCase();
 
