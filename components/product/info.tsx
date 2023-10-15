@@ -53,7 +53,6 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
             variants={product.variants}
             availableForSale={product.availableForSale}
             quantity={quantity}
-            itemInCart={itemInCart}
           />
         </div>
       </div>
