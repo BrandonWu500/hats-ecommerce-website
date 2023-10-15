@@ -1,19 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import AddToCart from '@/components/cart/add-to-cart';
 import Price from '@/components/price';
+import VariantSelector from '@/components/product/variant-selector';
 import Prose from '@/components/prose';
-import Quantity from '@/components/quantity';
-import { Product } from '@/lib/shopify/types';
+import { Product, ProductVariant } from '@/lib/shopify/types';
 
 type Props = {
   product: Product;
-  itemInCart: boolean;
 };
-const ProductInfo = ({ product, itemInCart }: Props) => {
-  const [quantity, setQuantity] = useState(1);
+const ProductInfo = ({ product }: Props) => {
+  const searchParams = useSearchParams();
+
+  const { variants } = product;
+
+  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
+  const variant = variants.find((variant: ProductVariant) =>
+    variant.selectedOptions.every(
+      (option) => option.value === searchParams.get(option.name.toLowerCase())
+    )
+  );
+  const selectedVariantId = variant?.id || defaultVariantId;
+
+  const variantIdx =
+    variants.findIndex((variant) => variant.id === selectedVariantId) ?? 0;
 
   return (
     <div className="z-10 flex flex-col gap-6 xl:gap-5">
@@ -28,25 +40,28 @@ const ProductInfo = ({ product, itemInCart }: Props) => {
       ) : null}
 
       {/* ADD TO CART SECTION */}
-      <div className="flex flex-col items-center gap-8 xl:items-start">
+      <div className="flex flex-col items-center gap-6 xl:items-start">
         <Price
-          amount={product.priceRange.maxVariantPrice.amount}
-          currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+          amount={
+            product.variants[variantIdx]?.price.amount ||
+            product.priceRange.minVariantPrice.amount
+          }
+          currencyCode={
+            product.variants[variantIdx]?.price.currencyCode ||
+            product.priceRange.minVariantPrice.currencyCode
+          }
           className="text-center font-body text-[32px] font-medium"
         />
+
+        <VariantSelector
+          options={product.options}
+          variants={product.variants}
+        />
+
         <div className="flex flex-col items-center gap-8 xl:-translate-x-2 xl:flex-row xl:items-start">
-          {!itemInCart && (
-            <Quantity
-              quantity={quantity}
-              quantityAvailable={product.variants[0].quantityAvailable}
-              setQuantity={setQuantity}
-            />
-          )}
           <AddToCart
             variants={product.variants}
             availableForSale={product.availableForSale}
-            quantity={quantity}
-            itemInCart={itemInCart}
           />
         </div>
       </div>

@@ -3,14 +3,20 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Fragment, useEffect, useRef } from 'react';
 
 import RemoveItemButton from '@/components/cart/remove-item-button';
 import Price from '@/components/price';
 import Quantity from '@/components/quantity';
 import { useCartModal } from '@/hooks/use-cart-modal';
+import { DEFAULT_OPTION } from '@/lib/constants';
 import { Cart } from '@/lib/shopify/types';
-import Link from 'next/link';
+import { createUrl } from '@/lib/utils';
+
+type MerchandiseSearchParams = {
+  [key: string]: string;
+};
 
 type Props = {
   cart: Cart | undefined;
@@ -90,53 +96,80 @@ const CartModal = ({ cart }: Props) => {
                 </div>
               ) : (
                 <ul className="flex flex-col gap-6 overflow-y-auto">
-                  {cart.lines.map((item) => (
-                    <li key={item.id} className="flex gap-4">
-                      <Link
-                        href={`/product/${item.merchandise.product.handle}`}
-                        onClick={closeCart}
-                      >
-                        <div className="relative h-[255px] w-[162px]">
-                          <Image
-                            className="rounded-[10px] object-cover"
-                            fill
-                            sizes="162px"
-                            alt={
-                              item.merchandise.product.featuredImage.altText ||
-                              item.merchandise.product.title
-                            }
-                            src={item.merchandise.product.featuredImage.url}
-                          />
+                  {cart.lines.map((item) => {
+                    const merchandiseSearchParams =
+                      {} as MerchandiseSearchParams;
+
+                    item.merchandise.selectedOptions.forEach(
+                      ({ name, value }) => {
+                        if (value !== DEFAULT_OPTION) {
+                          merchandiseSearchParams[name.toLowerCase()] = value;
+                        }
+                      }
+                    );
+
+                    const merchandiseUrl = createUrl(
+                      `/product/${item.merchandise.product.handle}`,
+                      new URLSearchParams(merchandiseSearchParams)
+                    );
+
+                    return (
+                      <li key={item.id} className="flex gap-4">
+                        <Link href={merchandiseUrl} onClick={closeCart}>
+                          <div className="relative h-[255px] w-[162px]">
+                            <Image
+                              className="rounded-[10px] object-cover"
+                              fill
+                              sizes="162px"
+                              alt={
+                                item.merchandise.product.featuredImage
+                                  .altText || item.merchandise.product.title
+                              }
+                              src={item.merchandise.product.featuredImage.url}
+                            />
+                          </div>
+                        </Link>
+                        <div className="flex flex-col gap-8">
+                          <div className="flex flex-col gap-2">
+                            <Link href={merchandiseUrl} onClick={closeCart}>
+                              <p className="font-heading text-2xl font-semibold">
+                                {item.merchandise.product.title}
+                              </p>
+                            </Link>
+                            <Price
+                              className="font-body text-xl"
+                              amount={item.cost.totalAmount.amount}
+                              currencyCode={item.cost.totalAmount.currencyCode}
+                            />
+                            {item.merchandise.title !== DEFAULT_OPTION
+                              ? item.merchandise.selectedOptions.map(
+                                  ({ name, value }) => (
+                                    <p
+                                      key={name}
+                                      className="font-body text-lg text-slate-600"
+                                    >
+                                      <span>{name}: </span>
+                                      <span className="font-medium">
+                                        {value}
+                                      </span>
+                                    </p>
+                                  )
+                                )
+                              : null}
+                          </div>
+                          <RemoveItemButton item={item} />
+                          <div className="-translate-x-1">
+                            <Quantity
+                              item={item}
+                              quantityAvailable={
+                                item.merchandise.quantityAvailable
+                              }
+                            />
+                          </div>
                         </div>
-                      </Link>
-                      <div className="flex flex-col gap-8">
-                        <div className="flex flex-col gap-2">
-                          <Link
-                            href={`/product/${item.merchandise.product.handle}`}
-                            onClick={closeCart}
-                          >
-                            <p className="font-heading text-2xl font-semibold">
-                              {item.merchandise.product.title}
-                            </p>
-                          </Link>
-                          <Price
-                            className="font-body text-xl"
-                            amount={item.cost.totalAmount.amount}
-                            currencyCode={item.cost.totalAmount.currencyCode}
-                          />
-                        </div>
-                        <RemoveItemButton item={item} />
-                        <div className="-translate-x-1">
-                          <Quantity
-                            item={item}
-                            quantityAvailable={
-                              item.merchandise.quantityAvailable
-                            }
-                          />
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
               {cart && cart.totalQuantity > 0 && (
