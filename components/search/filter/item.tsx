@@ -18,7 +18,7 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   return (
     <DynamicTag
       href={createUrl(item.path, newParams)}
-      className={`block truncate text-2xl ${
+      className={`block truncate py-3 pl-4 pr-4 text-2xl ${
         active ? 'font-medium' : 'font-normal'
       }`}
     >
@@ -45,7 +45,7 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
     <DynamicTag
       prefetch={!active ? false : undefined}
       href={href}
-      className={`block truncate text-2xl ${
+      className={`block truncate py-3 pl-4 pr-4 text-2xl ${
         active ? 'font-medium' : 'font-normal'
       }`}
     >

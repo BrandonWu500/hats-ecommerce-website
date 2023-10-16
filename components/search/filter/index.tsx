@@ -55,7 +55,7 @@ const SearchFilter = ({ list, title }: Props) => {
                 <Listbox.Option
                   key={itemIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none bg-orange-100 py-3 pl-4 pr-4 ${
+                    `relative cursor-default select-none bg-orange-100 ${
                       active && 'bg-orange-200'
                     }`
                   }
