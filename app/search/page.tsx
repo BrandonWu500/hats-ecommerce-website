@@ -1,7 +1,8 @@
 import Container from '@/components/container';
 import Products from '@/components/products';
+import SearchFilter from '@/components/search/filter';
 import { defaultSort, sorting } from '@/lib/constants';
-import { getProducts } from '@/lib/shopify';
+import { getCollections, getProducts } from '@/lib/shopify';
 
 export const runtime = 'edge';
 
@@ -14,6 +15,8 @@ type Props = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 const SearchPage = async ({ searchParams }: Props) => {
+  const collections = await getCollections();
+
   const { sort, q: searchValue } = searchParams as { [key: string]: string };
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
@@ -23,6 +26,7 @@ const SearchPage = async ({ searchParams }: Props) => {
 
   return (
     <Container className="flex-col pb-8">
+      <SearchFilter list={collections} title="Collections" />
       <div className="w-full rounded-[10px] bg-orange-200 p-8 xl:px-48 xl:py-8">
         <p className="flex flex-col text-center font-body text-[32px] text-slate-600 xl:text-[48px]">
           <span className="capitalize">
