@@ -50,7 +50,7 @@ const SearchFilter = ({ list, title }: Props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-orange-100 text-base shadow ring-1 ring-slate-700 ring-opacity-5 focus:outline-none">
+            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-orange-100 text-base shadow ring-1 ring-slate-700 ring-opacity-5 focus:outline-none">
               {list.map((item, itemIdx) => (
                 <Listbox.Option
                   key={itemIdx}
