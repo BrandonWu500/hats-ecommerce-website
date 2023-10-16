@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { twMerge } from 'tailwind-merge';
 
 import { ListItem, PathFilterItem, SortFilterItem } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
@@ -46,7 +45,9 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
     <DynamicTag
       prefetch={!active ? false : undefined}
       href={href}
-      className={twMerge('w-full hover:underline hover:underline-offset-4')}
+      className={`block truncate text-2xl ${
+        active ? 'font-medium' : 'font-normal'
+      }`}
     >
       {item.title}
     </DynamicTag>
