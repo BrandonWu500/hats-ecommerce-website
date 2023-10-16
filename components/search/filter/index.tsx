@@ -11,12 +11,14 @@ type Props = {
   title?: string;
 };
 const SearchFilter = ({ list, title }: Props) => {
-  console.log(list, title);
   const [selected, setSelected] = useState(list[0]);
 
   return (
     <div className="mb-8 w-full font-body text-2xl">
       <Listbox value={selected} onChange={setSelected}>
+        <Listbox.Label className="pl-1 text-xl text-slate-500">
+          {title}
+        </Listbox.Label>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-orange-100 py-3 pl-4 pr-10 text-left text-slate-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
             <span className="block truncate">{selected.title}</span>
