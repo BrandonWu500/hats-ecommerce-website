@@ -14,6 +14,7 @@ import {
   removeFromCartMutation,
 } from '@/lib/shopify/mutations/cart';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
+import { getCollectionsQuery } from '@/lib/shopify/queries/collection';
 import { getMenuQuery } from '@/lib/shopify/queries/menu';
 import { getPageQuery, getPagesQuery } from '@/lib/shopify/queries/page';
 import {
@@ -23,6 +24,7 @@ import {
 } from '@/lib/shopify/queries/product';
 import {
   Cart,
+  Collection,
   Connection,
   Image,
   Menu,
@@ -31,6 +33,8 @@ import {
   ShopifyAddToCartOperation,
   ShopifyCart,
   ShopifyCartOperation,
+  ShopifyCollection,
+  ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
   ShopifyPageOperation,
@@ -161,6 +165,35 @@ const reshapeProducts = (products: ShopifyProduct[]) => {
   }
 
   return reshapedProducts;
+};
+
+const reshapeCollection = (
+  collection: ShopifyCollection
+): Collection | undefined => {
+  if (!collection) {
+    return undefined;
+  }
+
+  return {
+    ...collection,
+    path: `/search/${collection.handle}`,
+  };
+};
+
+const reshapeCollections = (collections: ShopifyCollection[]) => {
+  const reshapedCollections = [];
+
+  for (const collection of collections) {
+    if (collection) {
+      const reshapedCollection = reshapeCollection(collection);
+
+      if (reshapedCollection) {
+        reshapedCollections.push(reshapedCollection);
+      }
+    }
+  }
+
+  return reshapedCollections;
 };
 
 export async function getProducts({
@@ -371,4 +404,32 @@ export async function getPages(): Promise<Page[]> {
   });
 
   return removeEdgesAndNodes(res.body.data.pages);
+}
+
+export async function getCollections(): Promise<Collection[]> {
+  const res = await shopifyFetch<ShopifyCollectionsOperation>({
+    query: getCollectionsQuery,
+    tags: [TAGS.collections],
+  });
+  const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
+  const collections = [
+    {
+      handle: '',
+      title: 'All',
+      description: 'All products',
+      seo: {
+        title: 'All',
+        description: 'All products',
+      },
+      path: '/search',
+      updatedAt: new Date().toISOString(),
+    },
+    // Filter out the `hidden` collections.
+    // Collections that start with `hidden-*` need to be hidden on the search page.
+    ...reshapeCollections(shopifyCollections).filter(
+      (collection) => !collection.handle.startsWith('hidden')
+    ),
+  ];
+
+  return collections;
 }
