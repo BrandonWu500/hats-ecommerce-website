@@ -14,7 +14,11 @@ import {
   removeFromCartMutation,
 } from '@/lib/shopify/mutations/cart';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
-import { getCollectionsQuery } from '@/lib/shopify/queries/collection';
+import {
+  getCollectionProductsQuery,
+  getCollectionQuery,
+  getCollectionsQuery,
+} from '@/lib/shopify/queries/collection';
 import { getMenuQuery } from '@/lib/shopify/queries/menu';
 import { getPageQuery, getPagesQuery } from '@/lib/shopify/queries/page';
 import {
@@ -34,6 +38,8 @@ import {
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCollection,
+  ShopifyCollectionOperation,
+  ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
@@ -432,4 +438,47 @@ export async function getCollections(): Promise<Collection[]> {
   ];
 
   return collections;
+}
+
+export async function getCollection(
+  handle: string
+): Promise<Collection | undefined> {
+  const res = await shopifyFetch<ShopifyCollectionOperation>({
+    query: getCollectionQuery,
+    tags: [TAGS.collections],
+    variables: {
+      handle,
+    },
+  });
+
+  return reshapeCollection(res.body.data.collection);
+}
+
+export async function getCollectionProducts({
+  collection,
+  reverse,
+  sortKey,
+}: {
+  collection: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+    query: getCollectionProductsQuery,
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+    },
+  });
+
+  if (!res.body.data.collection) {
+    console.log(`No collection found for \`${collection}\``);
+    return [];
+  }
+
+  return reshapeProducts(
+    removeEdgesAndNodes(res.body.data.collection.products)
+  );
 }
