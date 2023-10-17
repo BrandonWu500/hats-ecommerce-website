@@ -8,9 +8,11 @@ type Props = {
 };
 const SearchLayout = ({ children }: Props) => {
   return (
-    <Container className="flex-col pb-8">
-      <Collections />
-      <SearchFilter list={sorting} title="Sort By" />
+    <Container className="flex-col gap-4 pb-8">
+      <div className="w-full">
+        <Collections />
+        <SearchFilter list={sorting} title="Sort By" />
+      </div>
       {children}
     </Container>
   );

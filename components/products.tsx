@@ -8,9 +8,11 @@ type Props = {
 const Products = ({ products, title }: Props) => {
   return (
     <div className="mb-16">
-      <h2 className="mb-12 text-center font-heading text-[32px] font-semibold xl:text-left xl:text-5xl">
-        {title}
-      </h2>
+      {title && (
+        <h2 className="mb-12 text-center font-heading text-[32px] font-semibold xl:text-left xl:text-5xl">
+          {title}
+        </h2>
+      )}
       <ul className="grid grid-cols-1 gap-16 xl:grid-cols-3 xl:gap-x-8 xl:gap-y-[72px]">
         {products?.map((product) => (
           <ProductCard

@@ -6,7 +6,7 @@ import SearchModal from '@/components/search/modal';
 
 const Header = () => {
   return (
-    <div className="sticky top-0 z-50 mb-8 flex h-[80px] justify-center bg-slate-600 xl:h-[100px] xl:pr-0">
+    <div className="sticky top-0 z-50 mb-4 flex h-[80px] justify-center bg-slate-600 xl:mb-6 xl:h-[100px] xl:pr-0">
       <Container>
         <Logo />
         <div className="hidden xl:flex xl:grow xl:justify-center">
