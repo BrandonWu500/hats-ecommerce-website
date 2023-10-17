@@ -95,7 +95,7 @@ const CartModal = ({ cart }: Props) => {
                   </p>
                 </div>
               ) : (
-                <ul className="flex flex-col gap-6 overflow-y-auto">
+                <ul className="flex flex-col gap-6 overflow-y-auto xl:scrollbar-thin xl:scrollbar-track-orange-200 xl:scrollbar-thumb-slate-600">
                   {cart.lines.map((item) => {
                     const merchandiseSearchParams =
                       {} as MerchandiseSearchParams;
