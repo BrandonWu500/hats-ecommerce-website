@@ -136,11 +136,19 @@ const CartModal = ({ cart }: Props) => {
                                 {item.merchandise.product.title}
                               </p>
                             </Link>
-                            <Price
-                              className="font-body text-xl"
-                              amount={item.cost.totalAmount.amount}
-                              currencyCode={item.cost.totalAmount.currencyCode}
-                            />
+                            {item.merchandise.quantityAvailable > 0 ? (
+                              <Price
+                                className="font-body text-xl"
+                                amount={item.cost.totalAmount.amount}
+                                currencyCode={
+                                  item.cost.totalAmount.currencyCode
+                                }
+                              />
+                            ) : (
+                              <p className="-translate-x-1 rounded-full bg-orange-100 px-4 py-2 font-body text-lg font-medium">
+                                Out of Stock
+                              </p>
+                            )}
                             {item.merchandise.title !== DEFAULT_OPTION
                               ? item.merchandise.selectedOptions.map(
                                   ({ name, value }) => (
