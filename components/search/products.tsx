@@ -5,7 +5,7 @@ type Props = {
   products: Product[];
   title?: string;
 };
-const Products = ({ products, title }: Props) => {
+const SearchProducts = ({ products, title }: Props) => {
   return (
     <div className="mb-16">
       {title && (
@@ -13,7 +13,7 @@ const Products = ({ products, title }: Props) => {
           {title}
         </h2>
       )}
-      <ul className="grid grid-cols-1 gap-16 xl:grid-cols-3 xl:gap-x-8 xl:gap-y-[72px]">
+      <ul className="grid grid-cols-1 gap-16 xl:grid-cols-2 xl:gap-x-8 xl:gap-y-[72px]">
         {products?.map((product) => (
           <ProductCard
             key={product.handle}
@@ -27,4 +27,4 @@ const Products = ({ products, title }: Props) => {
     </div>
   );
 };
-export default Products;
+export default SearchProducts;

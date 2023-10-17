@@ -13,6 +13,10 @@ export type SortFilterItem = {
   reverse: boolean;
 };
 
+export type PathFilterItem = { title: string; path: string };
+
+export type ListItem = SortFilterItem | PathFilterItem;
+
 export const defaultSort: SortFilterItem = {
   title: 'Relevance',
   slug: null,
