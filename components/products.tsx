@@ -9,7 +9,7 @@ const Products = ({ products, title }: Props) => {
   return (
     <div className="mb-16">
       {title && (
-        <h2 className="mb-12 text-center font-heading text-[32px] font-semibold xl:text-left xl:text-5xl">
+        <h2 className="mb-4 text-center font-heading text-[32px] font-semibold xl:text-left xl:text-5xl">
           {title}
         </h2>
       )}

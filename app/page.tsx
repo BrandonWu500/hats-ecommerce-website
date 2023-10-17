@@ -17,7 +17,7 @@ const HomePage = async () => {
   const products = await getProducts({});
 
   return (
-    <Container className="flex-col gap-20 pb-8">
+    <Container className="flex-col gap-8 pb-8">
       <Billboard />
       <Products products={products} title="Products" />
     </Container>
