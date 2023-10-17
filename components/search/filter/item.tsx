@@ -16,14 +16,16 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   newParams.delete('q');
 
   return (
-    <DynamicTag
-      href={createUrl(item.path, newParams)}
-      className={`block truncate py-3 pl-4 pr-4 text-2xl ${
-        active ? 'font-medium' : 'font-normal'
-      }`}
-    >
-      {item.title}
-    </DynamicTag>
+    <li className="hover:bg-orange-200">
+      <DynamicTag
+        href={createUrl(item.path, newParams)}
+        className={`block truncate py-3 pl-4 pr-4 text-2xl ${
+          active ? 'font-medium' : 'font-normal'
+        }`}
+      >
+        {item.title}
+      </DynamicTag>
+    </li>
   );
 }
 
@@ -42,15 +44,17 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
   const DynamicTag = active ? 'p' : Link;
 
   return (
-    <DynamicTag
-      prefetch={!active ? false : undefined}
-      href={href}
-      className={`block truncate py-3 pl-4 pr-4 text-2xl ${
-        active ? 'font-medium' : 'font-normal'
-      }`}
-    >
-      {item.title}
-    </DynamicTag>
+    <li className="hover:bg-orange-200">
+      <DynamicTag
+        prefetch={!active ? false : undefined}
+        href={href}
+        className={`block truncate py-3 pl-4 pr-4 text-2xl ${
+          active ? 'font-medium' : 'font-normal'
+        }`}
+      >
+        {item.title}
+      </DynamicTag>
+    </li>
   );
 }
 
