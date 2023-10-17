@@ -1,4 +1,4 @@
-import Products from '@/components/products';
+import SearchProducts from '@/components/search/products';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getCollection, getCollectionProducts } from '@/lib/shopify';
 import { Metadata } from 'next';
@@ -39,9 +39,9 @@ const CollectionPage = async ({ params, searchParams }: Props) => {
   });
 
   return (
-    <>
-      <Products products={products} />
-    </>
+    <div className="col-span-2">
+      <SearchProducts products={products} />
+    </div>
   );
 };
 export default CollectionPage;

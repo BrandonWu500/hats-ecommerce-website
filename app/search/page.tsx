@@ -21,10 +21,10 @@ const SearchPage = async ({ searchParams }: Props) => {
   const resultsText = products.length === 1 ? 'hat' : 'hats';
 
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col gap-8">
       {searchValue && (
         <div className="w-full rounded-[10px] bg-orange-200 p-8 xl:px-48 xl:py-8">
-          <p className="flex flex-col text-center font-body text-[32px] text-slate-600 xl:text-[48px]">
+          <p className="flex flex-col text-center font-body text-[32px] text-slate-600">
             <span className="capitalize">
               Found {products.length} {resultsText} for
             </span>
