@@ -19,6 +19,7 @@
 Here is what I used to create BW Hats:
 
 - Figma
+- Adobe Illustrator
 - Jira
 - Shopify
 - Next.js
