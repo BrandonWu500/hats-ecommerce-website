@@ -382,6 +382,7 @@ export async function getMenu(handle: string): Promise<Menu[]> {
     variables: {
       handle,
     },
+    cache: 'default',
   });
 
   return (
@@ -399,6 +400,7 @@ export async function getPage(handle: string): Promise<Page> {
   const res = await shopifyFetch<ShopifyPageOperation>({
     query: getPageQuery,
     variables: { handle },
+    cache: 'default',
   });
 
   return res.body.data.pageByHandle;
@@ -407,6 +409,7 @@ export async function getPage(handle: string): Promise<Page> {
 export async function getPages(): Promise<Page[]> {
   const res = await shopifyFetch<ShopifyPagesOperation>({
     query: getPagesQuery,
+    cache: 'default',
   });
 
   return removeEdgesAndNodes(res.body.data.pages);
