@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.billboard-gradient {
+  background: linear-gradient(62deg, #fed7aa 0%, #ffedd5 100%);
+}
