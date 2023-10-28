@@ -1,7 +1,7 @@
 import Billboard from '@/components/billboard';
 import Container from '@/components/container';
 import Products from '@/components/products';
-import { getProducts } from '@/lib/shopify';
+import { getCollectionProducts } from '@/lib/shopify';
 
 export const runtime = 'edge';
 
@@ -14,12 +14,14 @@ export const metadata = {
 };
 
 const HomePage = async () => {
-  const products = await getProducts({});
+  const products = await getCollectionProducts({
+    collection: 'the-collection',
+  });
 
   return (
     <Container className="flex-col gap-8 pb-8 xl:gap-12">
       <Billboard />
-      <Products products={products} title="Products" />
+      <Products products={products} title="The Collection" />
     </Container>
   );
 };
