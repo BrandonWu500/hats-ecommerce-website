@@ -6,7 +6,7 @@ import twitterIcon from '/public/twitter.svg';
 
 const testimonials = [
   {
-    body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+    body: 'My order arrived super quickly. The Blue Fedora is even better than I hoped it would be. Very happy customer over here!',
     author: {
       name: 'Leslie Alexander',
       handle: 'lesliealexander',
@@ -16,7 +16,7 @@ const testimonials = [
     },
   },
   {
-    body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+    body: 'BW Hats make the best hats!',
     author: {
       name: 'Lindsay Walton',
       handle: 'lindsaywalton',
@@ -26,7 +26,7 @@ const testimonials = [
     },
   },
   {
-    body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
+    body: "My son loves the Ice Cream cap because that's his favorite food!",
     author: {
       name: 'Tom Cook',
       handle: 'tomcook',
@@ -36,7 +36,7 @@ const testimonials = [
     },
   },
   {
-    body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
+    body: 'Peaky Blinders has always been my favorite show on Netflix, and now when I walk around with the Peaky Blinder flat cap on, I feel 10x more confident in everything I do!',
     author: {
       name: 'Leonard Krasner',
       handle: 'leonardkrasner',
