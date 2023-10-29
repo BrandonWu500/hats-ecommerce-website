@@ -284,11 +284,6 @@ export type Article = {
   tags: string[];
 };
 
-export type ShopifyArticleOperation = {
-  data: { articleByHandle: Article };
-  variables: { handle: string };
-};
-
 export type ShopifyArticlesOperation = {
   data: {
     articles: Connection<Article>;

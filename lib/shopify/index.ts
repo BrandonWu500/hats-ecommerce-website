@@ -440,6 +440,23 @@ export async function getLatestArticle(): Promise<Article[]> {
   return removeEdgesAndNodes(res.body.data.articles);
 }
 
+export async function getArticle(handle: string): Promise<Article> {
+  const res = await shopifyFetch<ShopifyArticlesOperation>({
+    query: getArticlesQuery,
+    cache: 'default',
+  });
+
+  // Manually filtering articles based on handle because
+  // Shopify storefront api doesn't have articleByHandle
+  // like they do with pageByHandle
+  const articles = removeEdgesAndNodes(res.body.data.articles);
+  const article = articles.filter(
+    (articleItem) => articleItem.handle === handle
+  );
+
+  return article[0];
+}
+
 export async function getCollections(): Promise<Collection[]> {
   const res = await shopifyFetch<ShopifyCollectionsOperation>({
     query: getCollectionsQuery,
