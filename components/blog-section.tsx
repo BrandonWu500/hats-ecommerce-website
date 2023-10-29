@@ -1,6 +1,8 @@
-import { Article } from '@/lib/shopify/types';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import Time from '@/components/time';
+import { Article } from '@/lib/shopify/types';
 
 // const posts = [
 //   {
@@ -70,13 +72,7 @@ export default function BlogSection({ articles }: Props) {
           </Link>
           <div>
             <div className="flex items-center gap-x-4 text-xs">
-              <time dateTime={article.publishedAt} className="text-slate-500">
-                {new Intl.DateTimeFormat(undefined, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }).format(new Date(article.publishedAt))}
-              </time>
+              <Time datetime={article.publishedAt} className="text-slate-500" />
               <span className="relative z-10 cursor-default rounded-full bg-slate-50 px-3 py-1.5 font-medium text-slate-600">
                 {article.tags[0]}
               </span>
