@@ -41,6 +41,11 @@ export type Image = {
   height: number;
 };
 
+export type Author = {
+  name: string;
+  bio: string;
+};
+
 export type Menu = {
   title: string;
   path: string;
@@ -263,5 +268,29 @@ export type ShopifyProductsOperation = {
     query?: string;
     reverse?: boolean;
     sortKey?: string;
+  };
+};
+
+export type Article = {
+  id: string;
+  title: string;
+  handle: string;
+  content: string;
+  excerpt: string;
+  seo?: SEO;
+  publishedAt: string;
+  image: Image;
+  authorV2: Author;
+  tags: string[];
+};
+
+export type ShopifyArticleOperation = {
+  data: { articleByHandle: Article };
+  variables: { handle: string };
+};
+
+export type ShopifyArticlesOperation = {
+  data: {
+    articles: Connection<Article>;
   };
 };
