@@ -37,7 +37,7 @@ const HomePage = async () => {
             <p className="mt-2 text-lg leading-8 text-slate-600">
               Keep up with the latest fashion trends in the hat world.
             </p>
-            <BlogSection articles={article} />
+            <BlogSection articles={[article]} />
           </div>
         </div>
       </div>

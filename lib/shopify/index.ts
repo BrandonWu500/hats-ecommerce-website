@@ -13,10 +13,7 @@ import {
   editCartItemsMutation,
   removeFromCartMutation,
 } from '@/lib/shopify/mutations/cart';
-import {
-  getArticlesQuery,
-  getLatestArticleQuery,
-} from '@/lib/shopify/queries/article';
+import { getArticlesQuery } from '@/lib/shopify/queries/article';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
 import {
   getCollectionProductsQuery,
@@ -431,13 +428,15 @@ export async function getArticles(): Promise<Article[]> {
   return removeEdgesAndNodes(res.body.data.articles);
 }
 
-export async function getLatestArticle(): Promise<Article[]> {
+export async function getLatestArticle(): Promise<Article> {
   const res = await shopifyFetch<ShopifyArticlesOperation>({
-    query: getLatestArticleQuery,
+    query: getArticlesQuery,
     cache: 'default',
   });
 
-  return removeEdgesAndNodes(res.body.data.articles);
+  const articles = removeEdgesAndNodes(res.body.data.articles);
+
+  return articles[0];
 }
 
 export async function getArticle(handle: string): Promise<Article> {

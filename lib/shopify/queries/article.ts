@@ -29,20 +29,7 @@ const articleFragment = /* GraphQL */ `
 
 export const getArticlesQuery = /* GraphQL */ `
   query getArticles {
-    articles(first: 10) {
-      edges {
-        node {
-          ...article
-        }
-      }
-    }
-  }
-  ${articleFragment}
-`;
-
-export const getLatestArticleQuery = /* GraphQL */ `
-  query getLatestArticle {
-    articles(first: 1) {
+    articles(first: 100, reverse: true) {
       edges {
         node {
           ...article
