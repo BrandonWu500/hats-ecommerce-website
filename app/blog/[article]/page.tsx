@@ -45,9 +45,10 @@ export default async function ArticlePage({
       <h1 className="mb-4 text-center font-body text-4xl font-medium xl:text-5xl">
         {article.title}
       </h1>
-      <p className="mb-8 text-center text-2xl xl:text-3xl">
-        <span>By: {article.authorV2.name}</span>
+      <p className="mb-8 text-center text-xl xl:text-3xl">
+        By: {article.authorV2.name} | {article.authorV2.bio}
       </p>
+      <p></p>
       <div className="prose relative mb-8 aspect-[16/9] w-full">
         <Image
           src={article.image.url}
