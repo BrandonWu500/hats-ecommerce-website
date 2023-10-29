@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.shopify.com',
-        pathname: '/s/files/**',
-      },
-    ],
+    domains: ['cdn.shopify.com', 'images.unsplash.com'],
   },
   experimental: {
     serverActions: true,

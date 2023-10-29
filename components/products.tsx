@@ -7,7 +7,7 @@ type Props = {
 };
 const Products = ({ products, title }: Props) => {
   return (
-    <div className="mb-16">
+    <div>
       {title && (
         <h2 className="mb-4 text-center font-heading text-[32px] font-semibold xl:mb-6 xl:text-left xl:text-5xl">
           {title}
