@@ -82,7 +82,7 @@ export default function BlogSection({ articles }: Props) {
               </span>
             </div>
             <div className="group relative max-w-xl">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-700 group-hover:text-slate-600">
+              <h3 className="mt-3 text-lg font-medium leading-6 text-slate-700 group-hover:text-slate-600">
                 <Link href={`/blog/${article.handle}`}>
                   <span className="absolute inset-0" />
                   {article.title}
@@ -103,7 +103,7 @@ export default function BlogSection({ articles }: Props) {
                         />
                       </div> */}
                 <div className="text-sm leading-6">
-                  <p className="font-semibold text-slate-700">
+                  <p className="font-medium text-slate-700">
                     <span>
                       <span className="absolute inset-0" />
                       By: {article.authorV2.name}
