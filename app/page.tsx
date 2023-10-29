@@ -1,4 +1,5 @@
 import Billboard from '@/components/billboard';
+import BlogSection from '@/components/blog-section';
 import Container from '@/components/container';
 import Products from '@/components/products';
 import Testimonials from '@/components/testimonials';
@@ -24,6 +25,7 @@ const HomePage = async () => {
       <Billboard />
       <Products products={products} title="The Collection" />
       <Testimonials />
+      <BlogSection />
     </Container>
   );
 };
