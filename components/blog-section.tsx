@@ -49,67 +49,52 @@ type Props = {
 };
 export default function BlogSection({ articles }: Props) {
   return (
-    <div className="w-full rounded-[10px] border-4 border-slate-600 bg-transparent py-6 sm:py-8">
-      <div className="px-6 lg:px-8">
-        <div className="mx-auto">
-          <h2 className="font-heading text-3xl font-semibold text-slate-700 sm:text-4xl">
-            From the blog
-          </h2>
-          <p className="mt-2 text-lg leading-8 text-slate-600">
-            Keep up with the latest fashion trends in the hat world.
-          </p>
-          <div className="mt-8 space-y-10 lg:mt-10 lg:space-y-10">
-            {articles.map((article) => (
-              <article
-                key={article.id}
-                className="relative isolate flex flex-col gap-8 lg:flex-row"
-              >
-                <Link
-                  href={`/blog/${article.handle}`}
-                  className="cursor-pointer"
-                >
-                  <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
-                    <div className="absolute inset-0 h-full w-full">
-                      <Image
-                        src={article.image.url}
-                        alt=""
-                        className="rounded-2xl bg-slate-50 object-cover"
-                        fill
-                      />
-                    </div>
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-slate-700/10" />
-                  </div>
+    <div className="mt-8 space-y-10 lg:mt-10 lg:space-y-10">
+      {articles.map((article) => (
+        <article
+          key={article.id}
+          className="relative isolate flex flex-col gap-8 lg:flex-row"
+        >
+          <Link href={`/blog/${article.handle}`} className="cursor-pointer">
+            <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+              <div className="absolute inset-0 h-full w-full">
+                <Image
+                  src={article.image.url}
+                  alt=""
+                  className="rounded-2xl bg-slate-50 object-cover"
+                  fill
+                />
+              </div>
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-slate-700/10" />
+            </div>
+          </Link>
+          <div>
+            <div className="flex items-center gap-x-4 text-xs">
+              <time dateTime={article.publishedAt} className="text-slate-500">
+                {new Intl.DateTimeFormat(undefined, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }).format(new Date(article.publishedAt))}
+              </time>
+              <span className="relative z-10 cursor-default rounded-full bg-slate-50 px-3 py-1.5 font-medium text-slate-600">
+                {article.tags[0]}
+              </span>
+            </div>
+            <div className="group relative max-w-xl">
+              <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-700 group-hover:text-slate-600">
+                <Link href={`/blog/${article.handle}`}>
+                  <span className="absolute inset-0" />
+                  {article.title}
                 </Link>
-                <div>
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <time
-                      dateTime={article.publishedAt}
-                      className="text-slate-500"
-                    >
-                      {new Intl.DateTimeFormat(undefined, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      }).format(new Date(article.publishedAt))}
-                    </time>
-                    <span className="relative z-10 cursor-default rounded-full bg-slate-50 px-3 py-1.5 font-medium text-slate-600">
-                      {article.tags[0]}
-                    </span>
-                  </div>
-                  <div className="group relative max-w-xl">
-                    <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-700 group-hover:text-slate-600">
-                      <Link href={`/blog/${article.handle}`}>
-                        <span className="absolute inset-0" />
-                        {article.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-5 text-sm leading-6 text-slate-600">
-                      {article.excerpt}
-                    </p>
-                  </div>
-                  <div className="mt-6 flex border-t border-slate-700/10 pt-6">
-                    <div className="relative flex items-center gap-x-4">
-                      {/* <div className="relative h-10 w-10">
+              </h3>
+              <p className="mt-5 text-sm leading-6 text-slate-600">
+                {article.excerpt}
+              </p>
+            </div>
+            <div className="mt-6 flex border-t border-slate-700/10 pt-6">
+              <div className="relative flex items-center gap-x-4">
+                {/* <div className="relative h-10 w-10">
                         <Image
                           src={article.author.imageUrl}
                           alt=""
@@ -117,23 +102,20 @@ export default function BlogSection({ articles }: Props) {
                           fill
                         />
                       </div> */}
-                      <div className="text-sm leading-6">
-                        <p className="font-semibold text-slate-700">
-                          <span>
-                            <span className="absolute inset-0" />
-                            By: {article.authorV2.name}
-                          </span>
-                        </p>
-                        <p className="text-slate-600">{article.authorV2.bio}</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="text-sm leading-6">
+                  <p className="font-semibold text-slate-700">
+                    <span>
+                      <span className="absolute inset-0" />
+                      By: {article.authorV2.name}
+                    </span>
+                  </p>
+                  <p className="text-slate-600">{article.authorV2.bio}</p>
                 </div>
-              </article>
-            ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </article>
+      ))}
     </div>
   );
 }
