@@ -4,7 +4,7 @@ import seoFragment from '@/lib/shopify/fragments/seo';
 const articleFragment = /* GraphQL */ `
   fragment article on Article {
     ... on Article {
-      content
+      contentHtml
       excerpt
       image {
         ...image

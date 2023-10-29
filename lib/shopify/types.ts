@@ -275,7 +275,7 @@ export type Article = {
   id: string;
   title: string;
   handle: string;
-  content: string;
+  contentHtml: string;
   excerpt: string;
   seo?: SEO;
   publishedAt: string;
