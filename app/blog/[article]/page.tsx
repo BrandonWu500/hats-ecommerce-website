@@ -20,12 +20,23 @@ export async function generateMetadata({
 
   if (!article) return notFound();
 
+  const { url, width, height, altText: alt } = article.image;
+
   return {
     title: article.seo?.title || article.title,
     description: article.seo?.description || article.excerpt,
     openGraph: {
       publishedTime: article.publishedAt,
+      authors: [article.authorV2.name],
       type: 'article',
+      images: [
+        {
+          url,
+          width,
+          height,
+          alt,
+        },
+      ],
     },
   };
 }
