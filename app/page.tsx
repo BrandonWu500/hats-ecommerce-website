@@ -3,9 +3,11 @@ import BlogSection from '@/components/blog-section';
 import Container from '@/components/container';
 import Products from '@/components/products';
 import Testimonials from '@/components/testimonials';
-import { getCollectionProducts } from '@/lib/shopify';
+import { getArticles, getCollectionProducts } from '@/lib/shopify';
 
 export const runtime = 'edge';
+
+export const revalidate = 60;
 
 export const metadata = {
   description:
@@ -19,13 +21,14 @@ const HomePage = async () => {
   const products = await getCollectionProducts({
     collection: 'the-collection',
   });
+  const articles = await getArticles();
 
   return (
     <Container className="flex-col gap-8 pb-8 xl:gap-12">
       <Billboard />
       <Products products={products} title="The Collection" />
       <Testimonials />
-      <BlogSection />
+      <BlogSection articles={articles} />
     </Container>
   );
 };
