@@ -39,3 +39,16 @@ export const getArticlesQuery = /* GraphQL */ `
   }
   ${articleFragment}
 `;
+
+export const getLatestArticleQuery = /* GraphQL */ `
+  query getLatestArticle {
+    articles(first: 1) {
+      edges {
+        node {
+          ...article
+        }
+      }
+    }
+  }
+  ${articleFragment}
+`;
