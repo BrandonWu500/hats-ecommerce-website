@@ -88,7 +88,7 @@ export default function BlogSection({ articles }: Props) {
                 {article.excerpt}
               </p>
             </div>
-            <div className="mt-6 flex border-t border-slate-700/10 pt-6">
+            <div className="mt-4 flex border-t border-slate-700/10 pt-4">
               <div className="relative flex items-center gap-x-4">
                 {/* <div className="relative h-10 w-10">
                         <Image
