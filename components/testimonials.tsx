@@ -1,8 +1,6 @@
+import Icon from '@/components/icon';
 import Image from 'next/image';
-import facebookIcon from '/public/facebook.svg';
-import instagramIcon from '/public/instagram.svg';
-import tiktokIcon from '/public/tiktok.svg';
-import twitterIcon from '/public/twitter.svg';
+import { SiFacebook, SiInstagram, SiTiktok, SiTwitter } from 'react-icons/si';
 
 const testimonials = [
   {
@@ -12,7 +10,7 @@ const testimonials = [
       handle: 'lesliealexander',
       imageUrl:
         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: twitterIcon,
+      socialMediaSourceIcon: SiTwitter,
     },
   },
   {
@@ -22,7 +20,7 @@ const testimonials = [
       handle: 'lindsaywalton',
       imageUrl:
         'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: facebookIcon,
+      socialMediaSourceIcon: SiFacebook,
     },
   },
   {
@@ -32,7 +30,7 @@ const testimonials = [
       handle: 'tomcook',
       imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: instagramIcon,
+      socialMediaSourceIcon: SiInstagram,
     },
   },
   {
@@ -42,7 +40,7 @@ const testimonials = [
       handle: 'leonardkrasner',
       imageUrl:
         'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: tiktokIcon,
+      socialMediaSourceIcon: SiTiktok,
     },
   },
 ];
@@ -87,7 +85,10 @@ export default function Testimonials() {
                         <div className="text-slate-600 xl:text-base">{`@${testimonial.author.handle}`}</div>
                       </div>
                     </div>
-                    <Image src={testimonial.author.logoUrl} alt="" />
+                    <Icon
+                      icon={testimonial.author.socialMediaSourceIcon}
+                      className="h-7 w-7 text-slate-600"
+                    />
                   </figcaption>
                 </figure>
               </div>
