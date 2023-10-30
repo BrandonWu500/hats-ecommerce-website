@@ -1,6 +1,6 @@
 # BW Hats
 
-![BW Hats Landing Page](/public/bw-hats-landing-page.png)
+![BW Hats Landing Page](/public/bw-hats-thumbnail.png)
 
 ## Table of Contents
 
