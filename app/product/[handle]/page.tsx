@@ -58,19 +58,44 @@ const ProductPage = async ({ params }: Props) => {
 
   const relatedProducts = await getProductRecommendations(product.id);
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    description: product.description,
+    image: product.featuredImage.url,
+    offers: {
+      '@type': 'AggregateOffer',
+      availability: product.availableForSale
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+      highPrice: product.priceRange.maxVariantPrice.amount,
+      lowPrice: product.priceRange.minVariantPrice.amount,
+    },
+  };
+
   return (
-    <Container className="mb-16 flex-col gap-12 xl:mb-24">
-      <div className="flex w-full flex-col gap-8 xl:flex-row">
-        <ProductGallery
-          images={product.images.map((image: Image) => ({
-            src: image.url,
-            altText: image.altText,
-          }))}
-        />
-        <ProductInfo product={product} />
-      </div>
-      <ProductSlider products={relatedProducts} title="Related Products" />
-    </Container>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productJsonLd),
+        }}
+      />
+      <Container className="mb-16 flex-col gap-12 xl:mb-24">
+        <div className="flex w-full flex-col gap-8 xl:flex-row">
+          <ProductGallery
+            images={product.images.map((image: Image) => ({
+              src: image.url,
+              altText: image.altText,
+            }))}
+          />
+          <ProductInfo product={product} />
+        </div>
+        <ProductSlider products={relatedProducts} title="Related Products" />
+      </Container>
+    </>
   );
 };
 export default ProductPage;
