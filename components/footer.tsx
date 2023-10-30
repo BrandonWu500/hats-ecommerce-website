@@ -5,7 +5,24 @@ import Container from '@/components/container';
 import Icon from '@/components/icon';
 import { getMenu } from '@/lib/shopify';
 
-const socialIcons = [SiFacebook, SiInstagram, SiTiktok, SiTwitter];
+const socialLinks = [
+  {
+    icon: SiFacebook,
+    url: 'https://www.facebook.com/people/BW-Hats/61553078035122',
+  },
+  {
+    icon: SiInstagram,
+    url: 'https://www.instagram.com/bw.hats',
+  },
+  {
+    icon: SiTiktok,
+    url: 'https://www.tiktok.com/@bw.hats',
+  },
+  {
+    icon: SiTwitter,
+    url: 'https://twitter.com/BW_Hats',
+  },
+];
 
 const Footer = async () => {
   const menu = await getMenu('footer');
@@ -23,8 +40,10 @@ const Footer = async () => {
         <div className="flex w-full flex-col-reverse items-center gap-6 border-t border-orange-200 py-6 xl:flex-row">
           <p className="flex-1 text-center xl:text-left">{`© 2023 BW Hats Inc. All rights reserved.`}</p>
           <div className="flex w-full flex-1 items-center justify-center gap-14 px-8 xl:justify-end xl:gap-7 xl:p-0">
-            {socialIcons.map((icon, idx) => (
-              <Icon key={idx} icon={icon} className="h-6 w-6 cursor-pointer" />
+            {socialLinks.map((link, idx) => (
+              <a key={idx} href={link.url} target="_blank">
+                <Icon icon={link.icon} className="h-6 w-6 cursor-pointer" />
+              </a>
             ))}
           </div>
         </div>
