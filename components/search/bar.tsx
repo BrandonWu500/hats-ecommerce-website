@@ -35,7 +35,7 @@ const SearchBar = () => {
         placeholder="What are you looking for today?"
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full grow rounded-full bg-orange-200 py-3 pl-6 pr-4 font-body text-slate-700 placeholder:text-slate-600 focus:outline-none xl:text-lg"
+        className="w-full grow rounded-full border-0 bg-orange-200 py-3 pl-6 pr-4 font-body text-slate-700 placeholder:text-slate-600 focus:outline-none focus:ring-0 xl:text-lg"
       />
       <button className="flex h-full items-center">
         <MagnifyingGlassIcon className="h-5 xl:h-6" />
