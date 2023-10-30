@@ -35,8 +35,8 @@ export default async function Page({ params }: { params: { page: string } }) {
   if (!page) return notFound();
 
   return (
-    <Container className="flex-col px-8 pb-8 xl:pt-4">
-      <h1 className="mb-8 font-heading text-5xl font-bold">{page.title}</h1>
+    <Container className="flex-col px-8 pb-12 pt-4 xl:pb-16">
+      <h1 className="mb-8 font-heading text-5xl font-semibold">{page.title}</h1>
       <Prose className="mb-8" html={page.body as string} />
       <p className="font-body italic">
         {`This document was last updated on ${new Intl.DateTimeFormat(

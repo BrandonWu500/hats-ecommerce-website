@@ -13,6 +13,7 @@ import {
   editCartItemsMutation,
   removeFromCartMutation,
 } from '@/lib/shopify/mutations/cart';
+import { getArticlesQuery } from '@/lib/shopify/queries/article';
 import { getCartQuery } from '@/lib/shopify/queries/cart';
 import {
   getCollectionProductsQuery,
@@ -27,6 +28,7 @@ import {
   getProductsQuery,
 } from '@/lib/shopify/queries/product';
 import {
+  Article,
   Cart,
   Collection,
   Connection,
@@ -35,6 +37,7 @@ import {
   Page,
   Product,
   ShopifyAddToCartOperation,
+  ShopifyArticlesOperation,
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCollection,
@@ -391,7 +394,8 @@ export async function getMenu(handle: string): Promise<Menu[]> {
       path: item.url
         .replace(domain, '')
         .replace('/collections', '/search')
-        .replace('/pages', ''),
+        .replace('/pages', '')
+        .replace('/blogs/news', '/blog'),
     })) || []
   );
 }
@@ -413,6 +417,43 @@ export async function getPages(): Promise<Page[]> {
   });
 
   return removeEdgesAndNodes(res.body.data.pages);
+}
+
+export async function getArticles(): Promise<Article[]> {
+  const res = await shopifyFetch<ShopifyArticlesOperation>({
+    query: getArticlesQuery,
+    cache: 'default',
+  });
+
+  return removeEdgesAndNodes(res.body.data.articles);
+}
+
+export async function getLatestArticle(): Promise<Article> {
+  const res = await shopifyFetch<ShopifyArticlesOperation>({
+    query: getArticlesQuery,
+    cache: 'default',
+  });
+
+  const articles = removeEdgesAndNodes(res.body.data.articles);
+
+  return articles[0];
+}
+
+export async function getArticle(handle: string): Promise<Article> {
+  const res = await shopifyFetch<ShopifyArticlesOperation>({
+    query: getArticlesQuery,
+    cache: 'default',
+  });
+
+  // Manually filtering articles based on handle because
+  // Shopify storefront api doesn't have articleByHandle
+  // like they do with pageByHandle
+  const articles = removeEdgesAndNodes(res.body.data.articles);
+  const article = articles.filter(
+    (articleItem) => articleItem.handle === handle
+  );
+
+  return article[0];
 }
 
 export async function getCollections(): Promise<Collection[]> {
